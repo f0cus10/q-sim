@@ -1,3 +1,6 @@
+#ifndef DEVICES_HXX
+#define DEVICES_HXX
+
 #include <queue>
 #include <pair>
 
@@ -30,3 +33,5 @@ class Disk: public Device {
 public:
   void intake(PCB*);
 };
+
+#endif

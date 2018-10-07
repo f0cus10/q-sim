@@ -1,3 +1,6 @@
+#ifndef PCB_HXX
+#define PCB_HXX
+
 #include <string>
 using std::string;
 
@@ -15,3 +18,5 @@ public:
   /* Setters */
   void setStatus(char newStatus);
 };
+
+#endif

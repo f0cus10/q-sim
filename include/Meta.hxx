@@ -1,3 +1,6 @@
+#ifndef META_HXX
+#define META_HXX
+
 #include <string>
 using std::string;
 
@@ -17,3 +20,5 @@ public:
   char getAction();
   string getLength(); 
 };
+
+#endif

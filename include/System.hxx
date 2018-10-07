@@ -1,3 +1,6 @@
+#ifndef SYSTEM_HXX
+#define SYSTEM_HXX
+
 //This is the overview of the System
 #include <vector>
 #include <queue>
@@ -25,3 +28,5 @@ public:
   //Terminate and de-allocate a process
   void terminateProcess();
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef SHELL_HXX
+#define SHELL_HXX
+
 #include <iostream>
 #include <string>
 #include <iomanip> //for setw()
@@ -13,3 +16,5 @@ public:
   void bootstrap();
   void run();
 };
+
+#endif
