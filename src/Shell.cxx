@@ -91,3 +91,20 @@ void Shell::controller(string& user_input){
       return;
   }
 }
+
+/*
+* Add a process to the ready queue of the cpu
+* Generate a PID for the process
+*/
+void Shell::addProcess(){
+  //TODO
+  return;
+}
+
+/*
+* Kill (terminate) the process currently in the CPU
+*/
+void Shell::killProcess(){
+  //TODO
+  return;
+}
