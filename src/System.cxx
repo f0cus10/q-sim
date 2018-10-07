@@ -17,7 +17,7 @@ System::System(int p, int d, int f) {
 }
 
 void System::readyProcess(PCB* process){
-  read_q.push(process);
+  ready_q.push(process);
 }
 
 void System::terminateProcess(){
@@ -25,7 +25,8 @@ void System::terminateProcess(){
   delete currentProcess;
   //feed the next process
   if (ready_q.size() > 0) {
-    currentProcess = ready_q.pop();
+    currentProcess = ready_q.front();
+    ready_q.pop();
   }
   else {
     currentProcess = nullptr;
