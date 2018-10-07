@@ -12,10 +12,12 @@ using std::pair;
 
 class Device {
 private:
+  unsigned int id;
   queue< pair<PCB*, metaInfo> > deviceQueue;
 protected:
   virtual void addProcess(pair<PCB*, metaInfo>);
 public:
+  Device(unsigned int);
   PCB* getProcess();
 };
 
