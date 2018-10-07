@@ -39,3 +39,39 @@ void Shell::run() {
   controller(u_input);
   return;
 }
+
+void Shell::controller(string& user_input){
+  //Do a case by case switching
+  switch (user_input[0]){
+    case 'A':
+      addProcess();
+      return;
+    case 't':
+      killProcess();
+      return;
+    case 'p':
+      addPrinterJob(user_input);
+      return;
+    case 'P':
+      releasePrinterJob(user_input);
+      return;
+    case 'd':
+      addDiskFile(user_input);
+      return;
+    case 'D':
+      releaseDiskFile(user_input);
+      return;
+    case 'f':
+      addFlashFile(user_input);
+      return;
+    case 'F':
+      releaseFlashFile(user_input);
+      return;
+    case 'S':
+      snapshot();
+      return;
+    default:
+      cout << "Invalid Command" << endl;
+      return;
+  }
+}
