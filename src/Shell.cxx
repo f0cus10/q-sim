@@ -8,6 +8,9 @@
 
 using namespace std;
 
+/* Public Functions */
+/********************/
+
 Shell::Shell() {
   //Prompt the user for everything
   int p, d, f;
@@ -40,6 +43,19 @@ void Shell::run() {
   return;
 }
 
+bool Shell::isValid(const char& input){
+  int i = 0;
+  while (commands[i] != '\0'){
+    if(commands[i] == input){
+      return true;
+    }
+    ++i;
+  }
+  return false;
+}
+
+/* Private Functions */
+/*********************/
 void Shell::controller(string& user_input){
   //Do a case by case switching
   switch (user_input[0]){
