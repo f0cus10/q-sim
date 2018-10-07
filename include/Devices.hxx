@@ -29,4 +29,4 @@ public:
 class Disk: public Device {
 public:
   void intake(PCB*);
-}
+};
