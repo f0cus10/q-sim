@@ -19,24 +19,22 @@ protected:
 public:
   Device(unsigned int);
   PCB* getProcess();
+  void intake(PCB*, metaInfo);
 };
 
 class Printer: public Device {
 public:
   Printer(unsigned int printer_id): Device(printer_id) {}
-  void intake(PCB*);
 };
 
 class Flash: public Device {
 public:
   Flash(unsigned int flash_id): Device(flash_id) {}
-  void intake(PCB*);
 };
 
 class Disk: public Device {
 public:
   Disk(unsigned int disk_id): Device(disk_id) {}
-  void intake(PCB*);
 };
 
 #endif
