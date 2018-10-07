@@ -24,3 +24,18 @@ Shell::Shell() {
 Shell::~Shell() {
   delete theSystem;
 }
+
+void Shell::run() {
+  //This begins the running phase of the system and awaits keyboard input
+  cout << "> ";
+  string u_input;
+  getline(cin, u_input);
+  //Check against the command array to see if the command is valid
+  if (!isValid(u_input[0])){
+    cout << "Invalid Command" << endl;
+    return;
+  }
+  //process the command by offloading control to another function
+  controller(u_input);
+  return;
+}
