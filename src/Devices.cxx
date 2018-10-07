@@ -24,7 +24,7 @@ PCB* Device::getProcess(){
   return result;
 }
 
-//Generate a 
+//Generate a new entry for the back of the queue
 void Device::intake(PCB* candidate, metaInfo meta){
   pair<PCB*, metaInfo> newMember = make_pair(candidate, move(meta));
   deviceQueue.push(newMember);
