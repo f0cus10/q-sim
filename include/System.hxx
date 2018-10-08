@@ -35,9 +35,12 @@ public:
   unsigned int getFlashCount();
 
   //Issue system calls to devices from CPU process
-  void addPrinterQ(int, metaInfo&);
-  void addDiskQ(int, metaInfo&);
-  void addFlashQ(int, metaInfo&);
+  void addPrinterQ(int, metaInfo);
+  void addDiskQ(int, metaInfo);
+  void addFlashQ(int, metaInfo);
+
+  //Take a process out of the device queue and into the ready queue
+  void reQueue(char, int);
 };
 
 #endif

@@ -12,11 +12,9 @@ private:
   void addProcess();
   void killProcess();
   void addPrinterJob(const string&);
-  void releasePrinterJob(const string&);
   void addDiskFile(const string&);
-  void releaseDiskFile(const string&);
   void addFlashFile(const string&);
-  void releaseFlashFile(const string&);
+  void releaseDeviceQ(char, int);
   void snapshot();
   /* ------------- */
 
@@ -25,6 +23,7 @@ private:
   bool isValid(const char&);
   void controller(string&);
   bool devicePoll(char, int);
+  bool verify(const string&, int&);
   unsigned int pid_count = 0;
 public:
   /* Default Constructor & Destructor */

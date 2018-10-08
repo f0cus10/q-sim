@@ -72,19 +72,22 @@ void Shell::controller(string& user_input){
       addPrinterJob(user_input);
       return;
     case 'P':
-      releasePrinterJob(user_input);
+      char id = user_input[1];
+      releaseDeviceQ('P', id);
       return;
     case 'd':
       addDiskFile(user_input);
       return;
     case 'D':
-      releaseDiskFile(user_input);
+      char id = user_input[1];
+      releaseDeviceQ('D', id);
       return;
     case 'f':
       addFlashFile(user_input);
       return;
     case 'F':
-      releaseFlashFile(user_input);
+      char id = user_input[1];
+      releaseDeviceQ('F', id);
       return;
     case 'S':
       snapshot();
@@ -97,17 +100,27 @@ void Shell::controller(string& user_input){
 
 bool Shell::devicePoll(char type, int dev_id){
   int poll = 0;
-  if (type == 'p'){
+  if (type == 'p' || type == 'P'){
     poll = theSystem->getPrinterCount();
   }
-  else if (type == 'd'){
+  else if (type == 'd' || type == 'D'){
     poll = theSystem->getDiskCount();
   }
-  else if (type == 'f'){
+  else if (type == 'f' || type ='F'){
     poll = theSystem->getFlashCount();
   }
 
   if (poll < dev_id){
+    return false;
+  }
+  return true;
+}
+
+bool Shell::verify(const string& command, int& dev_id){
+  char num = command[1];
+  dev_id = num-'0';
+  if (!devicePoll(command[0], dev_id) {
+    cout << "Device does not exist" << endl;
     return false;
   }
   return true;
@@ -139,24 +152,70 @@ void Shell::killProcess(){
 * Add a job to the proper printer's queue by using this function
 */
 void Shell::addPrinterJob(const string& command){
-  //First, verify if the printer even exists
-  char num = command[1];
-  int devCount = num-'0';
-  if (!devicePoll(command[0], devCount){
+  int printer_id;
+  if(verify(command, printer_id)){
+    //Prompt for metadata
+    string fileName, mem, length;
+    cout << "Enter filename: ";
+    getline(cin, fileName);
+    cout << "Enter memory: ";
+    getline(cin, mem);
+    cout << "Enter file length: ";
+    getline(cin, length);
+
+    //construct a metaInfo using this info
+    metaInfo meta_data = metaInfo (fileName, mem, 'w', length);
+    theSystem->addPrinterQ(printer_id, meta_data);
+  }
+  return;
+}
+
+void Shell::addDiskFile(const string& command){
+  //verification phase
+  int disk_id;
+  if(verify(command, disk_id)){
+    string fileName, mem, length;
+    char action;
+    cout << "Enter filename: ";
+    getline(cin, fileName);
+    cout << "Enter Memory: ";
+    getline(cin, mem);
+    cout << "Action (r/w): ";
+    cin >> action;
+    cout << "Enter file length: ";
+    getline(cin, length);
+
+    metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    theSystem->addDiskQ(disk_id, meta_data);
+  }
+}
+
+void Shell::addFlashFile(const string& command){
+  //verification phase
+  int flash_id;
+  if(verify(command, flash_id)){
+    string fileName, mem, length;
+    char action;
+    cout << "Enter filename: ";
+    getline(cin, fileName);
+    cout << "Enter Memory: ";
+    getline(cin, mem);
+    cout << "Action (r/w): ";
+    cin >> action;
+    cout << "Enter file length: ";
+    getline(cin, length);
+
+    metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    theSystem->addFlashQ(flash_id, meta_data);
+  }
+}
+
+void Shell::releaseDeviceQ(char type, int dev_id){
+  if(!devicePoll(type, dev_id)){
     cout << "Device does not exist" << endl;
     return;
   }
-  //Construct a filename
-  string fileName, mem, length;
-  cout << "Enter filename: ";
-  getline(cin, fileName);
-  cout << "Enter memory: ";
-  getline(cin, mem);
-  cout << "Enter file length: ";
-  getline(cin, length);
-
-  //construct a metaInfo using this info
-  metaInfo meta_data = metaInfo (fileName, mem, 'w', length);
-  theSystem->addPrinterQ(devCount, meta_data);
+  //else,
+  theSystem->reQueue(type, dev_id);
   return;
 }
