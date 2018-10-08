@@ -1,9 +1,9 @@
 #include <utility>
 #include <vector>
 
-#include "Devices.hxx"
-#include "PCB.hxx"
-#include "Meta.hxx"
+#include "Devices.hpp"
+#include "PCB.hpp"
+#include "Meta.hpp"
 
 using namespace std;
 
@@ -27,6 +27,11 @@ PCB* Device::getProcess(){
 void Device::intake(PCB* candidate, metaInfo meta){
   pair<PCB*, metaInfo> newMember = make_pair(candidate, move(meta));
   deviceQueue.push(newMember);
+}
+
+void Device::addProcess(pair<PCB*, metaInfo> input){
+  //redundant function
+  intake(input.first, input.second);
 }
 
 vector <pair<PCB*, metaInfo> > Device::stat(){

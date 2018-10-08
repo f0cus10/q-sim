@@ -2,7 +2,7 @@
 #define SHELL_HXX
 
 #include <string>
-#include "System.hxx"
+#include "System.hpp"
 
 using std::string;
 
@@ -35,6 +35,7 @@ public:
   Shell();
   ~Shell();
   void run();
+  bool status = true;
 };
 
 #endif

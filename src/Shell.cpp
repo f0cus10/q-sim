@@ -4,10 +4,10 @@
 #include <iomanip> //for setw()
 #include <utility> //for pair()
 
-#include "PCB.hxx"
-#include "Shell.hxx"
-#include "System.hxx"
-#include "Meta.hxx"
+#include "PCB.hpp"
+#include "Shell.hpp"
+#include "System.hpp"
+#include "Meta.hpp"
 
 using namespace std;
 
@@ -25,6 +25,7 @@ Shell::Shell() {
   cin >> f;
   
   theSystem = new System(p, d, f);
+  cout << "System created" << endl;
 }
 
 Shell::~Shell() {
@@ -62,6 +63,7 @@ bool Shell::isValid(const char& input){
 
 void Shell::controller(string& user_input){
   //Do a case by case switching
+  char id = '\0';
   switch (user_input[0]){
     case 'A':
       addProcess();
@@ -73,21 +75,21 @@ void Shell::controller(string& user_input){
       addPrinterJob(user_input);
       return;
     case 'P':
-      char id = user_input[1];
+      id = user_input[1];
       releaseDeviceQ('P', id);
       return;
     case 'd':
       addDiskFile(user_input);
       return;
     case 'D':
-      char id = user_input[1];
+      id = user_input[1];
       releaseDeviceQ('D', id);
       return;
     case 'f':
       addFlashFile(user_input);
       return;
     case 'F':
-      char id = user_input[1];
+      id = user_input[1];
       releaseDeviceQ('F', id);
       return;
     case 'S':
@@ -107,7 +109,7 @@ bool Shell::devicePoll(char type, int dev_id){
   else if (type == 'd' || type == 'D'){
     poll = theSystem->getDiskCount();
   }
-  else if (type == 'f' || type ='F'){
+  else if (type == 'f' || type == 'F'){
     poll = theSystem->getFlashCount();
   }
 
@@ -120,7 +122,8 @@ bool Shell::devicePoll(char type, int dev_id){
 bool Shell::verify(const string& command, int& dev_id){
   char num = command[1];
   dev_id = num-'0';
-  if (!devicePoll(command[0], dev_id) {
+
+  if (!devicePoll(command[0], dev_id)) {
     cout << "Device does not exist" << endl;
     return false;
   }

@@ -1,5 +1,5 @@
-#include "System.hxx"
-#include "Devices.hxx"
+#include "System.hpp"
+#include "Devices.hpp"
 
 using namespace std;
 
@@ -18,12 +18,26 @@ System::System(int p, int d, int f) {
   }
 }
 
+System::~System(){
+  while(!ready_q.empty()){
+    auto process = ready_q.front();
+    ready_q.pop();
+    delete process;
+  }
+}
+
+void System::advance(){
+  if(ready_q.empty() || currentProcess == nullptr){
+    return;
+  }
+  currentProcess = ready_q.front();
+  currentProcess->setStatus('c');
+  ready_q.pop();
+  return;
+}
 void System::readyProcess(PCB* process){
   ready_q.push(process);
-  if (currentProcess == nullptr){
-    currentProcess = ready_q.front();
-    ready_q.pop();
-  }
+  advance();
   return;
 }
 
@@ -103,17 +117,9 @@ void System::reQueue(char type, int id){
   else if(type == 'd'){
     process = hdd[id].getProcess();
   }
-  else if(type = 'f'){
+  else if(type == 'f'){
     process = flashd[id].getProcess();
   }
   if(process != nullptr) ready_q.push(process);
   return;
-}
-
-void System::advance(){
-  if (currentProcess == nullptr){
-    currentProcess = ready_q.front();
-    ready_q.pop();
-    currentProcess->setStatus('c');
-  }
 }

@@ -5,8 +5,8 @@
 #include <utility>
 #include <vector>
 
-#include "Meta.hxx"
-#include "PCB.hxx"
+#include "Meta.hpp"
+#include "PCB.hpp"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ private:
   unsigned int id;
   queue< pair<PCB*, metaInfo> > deviceQueue;
 protected:
-  virtual void addProcess(pair<PCB*, metaInfo>);
+  void addProcess(pair<PCB*, metaInfo>);
 public:
   Device(unsigned int);
   PCB* getProcess();

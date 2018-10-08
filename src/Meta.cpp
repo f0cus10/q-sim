@@ -1,4 +1,4 @@
-#include "Meta.hxx"
+#include "Meta.hpp"
 
 metaInfo::metaInfo(string fName_, string mem, char acc, string length){
   fileName = fName_;

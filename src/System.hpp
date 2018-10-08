@@ -5,8 +5,8 @@
 #include <vector>
 #include <queue>
 
-#include "PCB.hxx"
-#include "Devices.hxx"
+#include "PCB.hpp"
+#include "Devices.hpp"
 
 using std::vector;
 using std::queue;
@@ -19,10 +19,11 @@ private:
   vector<Flash> flashd;
   queue<PCB*> ready_q;
   PCB* currentProcess = nullptr;
+  void advance();
 public:
   /* Overloaded Constructor for sys gen */
   System (int, int, int);
-
+  ~System();
   // Add process to the ready queue
   void readyProcess (PCB*);
 
@@ -47,8 +48,6 @@ public:
   void getPrinter(vector<vector<pair <PCB*, metaInfo> > >&);
   void getDisk(vector<vector<pair <PCB*, metaInfo> > >&);
   void getFlash(vector<vector<pair <PCB*, metaInfo> > >&);
-
-  void advance();
 };
 
 #endif
