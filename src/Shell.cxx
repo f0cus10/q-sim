@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip> //for setw()
 
+#include "PCB.hxx"
 #include "Shell.hxx"
 #include "System.hxx"
 
@@ -98,6 +99,9 @@ void Shell::controller(string& user_input){
 */
 void Shell::addProcess(){
   //TODO
+  //make a new PCB with the process
+  PCB* newProcess = new PCB(pid_count);
+  theSystem->readyProcess(newProcess);
   return;
 }
 
@@ -106,5 +110,6 @@ void Shell::addProcess(){
 */
 void Shell::killProcess(){
   //TODO
+  theSystem->terminateProcess();
   return;
 }

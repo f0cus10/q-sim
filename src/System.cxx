@@ -18,6 +18,11 @@ System::System(int p, int d, int f) {
 
 void System::readyProcess(PCB* process){
   ready_q.push(process);
+  if (currentProcess == nullptr){
+    currentProcess = ready_q.front();
+    ready_q.pop();
+  }
+  return;
 }
 
 void System::terminateProcess(){
