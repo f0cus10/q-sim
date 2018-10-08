@@ -47,6 +47,8 @@ public:
   void getPrinter(vector<vector<pair <PCB*, metaInfo> > >&);
   void getDisk(vector<vector<pair <PCB*, metaInfo> > >&);
   void getFlash(vector<vector<pair <PCB*, metaInfo> > >&);
+
+  void advance();
 };
 
 #endif

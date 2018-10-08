@@ -3,12 +3,12 @@
 
 #include <queue>
 #include <utility>
+#include <vector>
 
 #include "Meta.hxx"
 #include "PCB.hxx"
 
-using std::queue;
-using std::pair;
+using namespace std;
 
 class Device {
 private:
@@ -20,6 +20,7 @@ public:
   Device(unsigned int);
   PCB* getProcess();
   void intake(PCB*, metaInfo);
+  vector <pair<PCB*, metaInfo> > stat();
 };
 
 class Printer: public Device {

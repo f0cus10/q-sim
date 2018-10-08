@@ -1,12 +1,11 @@
 #include <utility>
+#include <vector>
 
 #include "Devices.hxx"
 #include "PCB.hxx"
 #include "Meta.hxx"
 
-using std::pair;
-using std::make_pair;
-using std::move;
+using namespace std;
 
 Device::Device(unsigned int device_id){
   id = device_id;
@@ -28,4 +27,14 @@ PCB* Device::getProcess(){
 void Device::intake(PCB* candidate, metaInfo meta){
   pair<PCB*, metaInfo> newMember = make_pair(candidate, move(meta));
   deviceQueue.push(newMember);
+}
+
+vector <pair<PCB*, metaInfo> > Device::stat(){
+  vector<pair<PCB*, metaInfo> > result;
+  auto copy = deviceQueue;
+  while(!copy.empty()){
+    result.push_back(copy.front());
+    copy.pop();
+  }
+  return result;
 }
