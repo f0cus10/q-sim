@@ -18,6 +18,11 @@ private:
   void snapshot();
   /* ------------- */
 
+  /* Snapshot assistants */
+  void readyQStat();
+  void devStat(char);
+  /* -------------------- */
+
   char commands[10] = {'A', 't', 'p', 'P', 'd', 'D', 'f', 'F', 'S','\0'};
   System* theSystem = nullptr;
   bool isValid(const char&);

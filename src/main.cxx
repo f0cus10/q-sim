@@ -4,6 +4,8 @@
 
 int main () {
   Shell sh;
-  sh.run();
+  while (true) {
+    sh.run();
+  }
   return 0;
 }

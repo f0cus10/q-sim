@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip> //for setw()
+#include <utility> //for pair()
 
 #include "PCB.hxx"
 #include "Shell.hxx"
@@ -218,4 +219,66 @@ void Shell::releaseDeviceQ(char type, int dev_id){
   //else,
   theSystem->reQueue(type, dev_id);
   return;
+}
+
+void Shell::snapshot(){
+  //First prompt for the type of snapshot
+  char type;
+  cout << "Enter an option (r/p/d/f): ";
+  cin >> type;
+  if (type == 'r'){
+    readyQStat();
+  }
+  else if (type == 'p' || type == 'd' || type == 'f'){
+    devStat(type);
+  }
+  else{
+    cout << "Invalid Option.";
+    snapshot();
+  }
+  return;
+}
+
+void Shell::readyQStat(){
+  cout << setw(7);
+  cout << "PID" << endl;
+
+  vector<PCB*> processes;
+  theSystem->getReady(processes);
+
+  for(auto& proc: processes){
+    cout << setw(7);
+    cout << proc->getPID() << endl;
+  }
+  return;
+}
+
+void Shell::devStat(char type){
+  cout << setw(4) << "PID" << setw(4) << "Filename";
+  cout << setw(6) << "Memstart" << setw(4) << "R/W";
+  cout << setw(4) << "File Length" << endl;
+
+  vector< vector< pair<PCB*, metaInfo> > > masterStat;
+  if (type == 'p'){
+    theSystem->getPrinter(masterStat);
+  }
+  else if(type == 'd'){
+    theSystem->getDisk(masterStat);
+  }
+  else if (type == 'f'){
+    theSystem->getFlash(masterStat);
+  }
+  //Go over masterStat and print everything
+  for (unsigned int i = 0; i < masterStat.size(); ++i){
+    cout << "----" << type << i << endl;
+    for (auto& eachPair: masterStat[i]) {
+      //print PID
+      cout << setw(4) << eachPair.first->getPID();
+      cout << setw(4) << eachPair.second.getFile();
+      cout << setw(6) << eachPair.second.getMem();
+      cout << setw(4) << eachPair.second.getAction();
+      cout << setw(4) << eachPair.second.getLength();
+      cout << endl;
+    }
+  }
 }

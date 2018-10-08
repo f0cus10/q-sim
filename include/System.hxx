@@ -41,6 +41,12 @@ public:
 
   //Take a process out of the device queue and into the ready queue
   void reQueue(char, int);
+
+  //Get contents of queues
+  void getReady(vector<PCB*>&);
+  void getPrinter(vector<vector<pair <PCB*, metaInfo> > >&);
+  void getDisk(vector<vector<pair <PCB*, metaInfo> > >&);
+  void getFlash(vector<vector<pair <PCB*, metaInfo> > >&);
 };
 
 #endif
