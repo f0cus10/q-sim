@@ -19,11 +19,13 @@ private:
   void releaseFlashFile(const string&);
   void snapshot();
   /* ------------- */
-  
+
   char commands[10] = {'A', 't', 'p', 'P', 'd', 'D', 'f', 'F', 'S','\0'};
   System* theSystem = nullptr;
   bool isValid(const char&);
   void controller(string&);
+  bool devicePoll(char, int);
+  unsigned int pid_count = 0;
 public:
   /* Default Constructor & Destructor */
   Shell();

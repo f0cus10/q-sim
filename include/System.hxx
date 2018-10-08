@@ -13,6 +13,7 @@ using std::queue;
 
 class System {
 private:
+  //TODO: Advance the next process in the ready_q to the CPU
   vector<Printer> printers;
   vector<Disk> hdd;
   vector<Flash> flashd;
@@ -27,6 +28,16 @@ public:
 
   //Terminate and de-allocate a process
   void terminateProcess();
+
+  //Get device counts for the system
+  unsigned int getPrinterCount();
+  unsigned int getDiskCount();
+  unsigned int getFlashCount();
+
+  //Issue system calls to devices from CPU process
+  void addPrinterQ(int, metaInfo&);
+  void addDiskQ(int, metaInfo&);
+  void addFlashQ(int, metaInfo&);
 };
 
 #endif
