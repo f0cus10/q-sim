@@ -5,15 +5,15 @@ using namespace std;
 
 System::System(int p, int d, int f) {
   //Generate the number of devices specified
-  for(unsigned int i = 0; i < p; ++p) {
+  for(unsigned int i = 0; i < p; ++i) {
     printers.push_back(Printer(i));
   }
 
-  for (unsigned int i = 0; i < d; ++d) {
+  for (unsigned int i = 0; i < d; ++i) {
     hdd.push_back(Disk(i));
   }
 
-  for(unsigned int i = 0; i < f; ++f) {
+  for(unsigned int i = 0; i < f; ++i) {
     flashd.push_back(Flash(i));
   }
 }
@@ -27,7 +27,7 @@ System::~System(){
 }
 
 void System::advance(){
-  if(ready_q.empty() || currentProcess == nullptr){
+  if(ready_q.empty() || currentProcess != nullptr){
     return;
   }
   currentProcess = ready_q.front();
@@ -68,15 +68,24 @@ unsigned int System::getFlashCount(){
 
 //System call issue
 void System::addPrinterQ(int device, metaInfo m_data){
+  if (currentProcess == nullptr){
+    return;
+  }
   printers[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
 }
 
 void System::addDiskQ(int device, metaInfo m_data){
+  if (currentProcess == nullptr){
+    return;
+  }
   hdd[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
 }
 void System::addFlashQ(int device, metaInfo m_data){
+  if (currentProcess == nullptr){
+    return;
+  }
   flashd[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
 }
