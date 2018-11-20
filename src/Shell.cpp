@@ -24,7 +24,23 @@ Shell::Shell() {
   cout << "How many flash drives?";
   cin >> f;
   
-  theSystem = new System(p, d, f);
+  double history;
+  int burstEstimate;
+  vector<int> cylinderData;
+  
+  cout << "Enter the history parameter (between 0 and 1): ";
+  cin >> history;
+  cout << "Enter initial burst estimate (in ms): ";
+  cin >> burstEstimate;
+  for (unsigned int i = 0; i < d; ++d){
+    int tempNumber;
+    cout << "Enter number of cylinders for disk_" << i << ": ";
+    cin >> tempNumber;
+    cylinderData.push_back(move(tempNumber));
+  }
+  
+  //TODO: Modify the constructor to take in the new parameters
+  theSystem = new System(p, d, f, history, burstEstimate, cylinderData);
   cout << "System created" << endl;
 }
 
