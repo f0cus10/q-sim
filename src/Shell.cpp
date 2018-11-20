@@ -32,7 +32,7 @@ Shell::Shell() {
   cin >> history;
   cout << "Enter initial burst estimate (in ms): ";
   cin >> burstEstimate;
-  for (unsigned int i = 0; i < d; ++d){
+  for (unsigned int i = 0; i < d; ++i){
     int tempNumber;
     cout << "Enter number of cylinders for disk_" << i << ": ";
     cin >> tempNumber;
