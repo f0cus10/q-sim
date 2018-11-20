@@ -3,14 +3,15 @@
 
 using namespace std;
 
-System::System(int p, int d, int f) {
+System::System(int p, int d, int f, double history, int burst, const vector<int>& cylinder) {
   //Generate the number of devices specified
   for(unsigned int i = 0; i < p; ++i) {
     printers.push_back(Printer(i));
   }
 
   for (unsigned int i = 0; i < d; ++i) {
-    hdd.push_back(Disk(i));
+    //TODO: Make a constructor for Disk with the right parameters
+    hdd.push_back(Disk(i, cylinder[i]));
   }
 
   for(unsigned int i = 0; i < f; ++i) {

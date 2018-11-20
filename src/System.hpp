@@ -22,7 +22,7 @@ private:
   void advance();
 public:
   /* Overloaded Constructor for sys gen */
-  System (int, int, int);
+  System (int, int, int, double, int, const vector<int>&);
   ~System();
   // Add process to the ready queue
   void readyProcess (PCB*);
