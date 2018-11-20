@@ -34,8 +34,11 @@ public:
 };
 
 class Disk: public Device {
+//Disk is an exception
 public:
-  Disk(unsigned int disk_id): Device(disk_id) {}
+  Disk(unsigned int disk_id, int cylinder_number): Device(disk_id), cylinder(cylinder_number) {}
+private:
+  int cylinder;
 };
 
 #endif
