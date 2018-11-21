@@ -1,14 +1,14 @@
 #include "PCB.hpp"
 
-unsigned int PCB::getPID(){
+unsigned int PCB::getPID() const {
   return pid;
 }
 
-char PCB::getStatus(){
+char PCB::getStatus() const {
   return status;
 }
 
-int PCB::getCurrentEstimate(){
+int PCB::getCurrentEstimate() const{
   return burstEstimate;
 }
 

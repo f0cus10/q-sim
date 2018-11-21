@@ -14,9 +14,9 @@ public:
   PCB (unsigned int id, char genStatus='q'): pid(id), status(genStatus) {}
   
   /* Getters */
-  unsigned int getPID();
-  char getStatus();
-  int getCurrentEstimate();
+  unsigned int getPID() const;
+  char getStatus() const;
+  int getCurrentEstimate() const;
 
   /* Setters */
   void setStatus(char newStatus);
