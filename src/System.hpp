@@ -29,7 +29,9 @@ public:
   ~System();
   // Add process to the ready queue
   void readyProcess (PCB*);
-
+  
+  //Returns true if there is a process in the system
+  bool presentProcess(){ return currentProcess != nullptr; }
   //Terminate and de-allocate a process
   void terminateProcess();
 

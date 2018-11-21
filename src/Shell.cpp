@@ -65,8 +65,10 @@ void Shell::run() {
 
 /* Private Functions */
 /*********************/
+
 //This function asks the timer how long the process has remained in the CPU
 void Shell::reviseEstimate(){
+  if (theSystem == nullptr || !theSystem->presentProcess()) return;
   int timeUsed;
   cout << "Enter amount of time spent in CPU (in ms): ";
   cin >> timeUsed;
@@ -158,8 +160,8 @@ bool Shell::verify(const string& command, int& dev_id){
 * Generate a PID for the process
 */
 void Shell::addProcess(){
-  //TODO
   //make a new PCB with the process
+  reviseEstimate();
   PCB* newProcess = new PCB(pid_count);
   theSystem->readyProcess(newProcess);
   ++pid_count;
@@ -192,6 +194,7 @@ void Shell::addPrinterJob(const string& command){
 
     //construct a metaInfo using this info
     metaInfo meta_data = metaInfo (fileName, mem, 'w', length);
+    reviseEstimate();
     theSystem->addPrinterQ(printer_id, meta_data);
   }
   return;
@@ -213,6 +216,7 @@ void Shell::addDiskFile(const string& command){
     getline(cin, length);
 
     metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    reviseEstimate();
     theSystem->addDiskQ(disk_id, meta_data);
   }
 }
@@ -233,6 +237,7 @@ void Shell::addFlashFile(const string& command){
     getline(cin, length);
 
     metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    reviseEstimate();
     theSystem->addFlashQ(flash_id, meta_data);
   }
 }
@@ -256,6 +261,7 @@ void Shell::snapshot(){
     readyQStat();
   }
   else if (type == 'p' || type == 'd' || type == 'f'){
+    reviseEstimate();
     devStat(type);
   }
   else{
