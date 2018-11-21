@@ -1,3 +1,6 @@
+#ifndef READYQ_HXX
+#define READYQ_HXX
+
 #include <queue>
 #include <vector>
 
@@ -25,3 +28,5 @@ public:
 private:
   priority_queue <PCB*, vector<PCB*>, SJF> custom_queue;
 };
+
+#endif
