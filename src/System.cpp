@@ -1,5 +1,6 @@
 #include "System.hpp"
 #include "Devices.hpp"
+#include "Ready_Q.hpp"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ System::System(int p, int d, int f, double history, int burst, const vector<int>
 
 System::~System(){
   while(!ready_q.empty()){
-    auto process = ready_q.front();
+    auto process = ready_q.top();
     ready_q.pop();
     delete process;
   }
@@ -35,7 +36,7 @@ void System::advance(){
   if(ready_q.empty() || currentProcess != nullptr){
     return;
   }
-  currentProcess = ready_q.front();
+  currentProcess = ready_q.top();
   currentProcess->setStatus('c');
   ready_q.pop();
   return;
@@ -54,7 +55,7 @@ void System::terminateProcess(){
   delete currentProcess;
   //feed the next process
   if (ready_q.size() > 0) {
-    currentProcess = ready_q.front();
+    currentProcess = ready_q.top();
     ready_q.pop();
   }
   else {
@@ -99,9 +100,9 @@ void System::addFlashQ(int device, metaInfo m_data){
 }
 
 void System::getReady(vector<PCB*>& v){
-  queue<PCB*> copy = ready_q;
+  ReadyQ copy = ready_q;
   while (!copy.empty()){
-    v.push_back(copy.front());
+    v.push_back(copy.top());
     copy.pop();
   }
   return;
