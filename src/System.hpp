@@ -7,17 +7,20 @@
 
 #include "PCB.hpp"
 #include "Devices.hpp"
+#include "Ready_Q.hpp"
 
 using std::vector;
 using std::queue;
 
 class System {
 private:
-  //TODO: Advance the next process in the ready_q to the CPU
+  double initialBurstEstimate;
+  double history_constant;
+  
   vector<Printer> printers;
   vector<Disk> hdd;
   vector<Flash> flashd;
-  queue<PCB*> ready_q;
+  ReadyQ ready_q;
   PCB* currentProcess = nullptr;
   void advance();
 public:

@@ -4,6 +4,10 @@
 using namespace std;
 
 System::System(int p, int d, int f, double history, int burst, const vector<int>& cylinder) {
+  //set the private variables
+  history_constant = history;
+  initialBurstEstimate = burst;
+  
   //Generate the number of devices specified
   for(unsigned int i = 0; i < p; ++i) {
     printers.push_back(Printer(i));
@@ -36,7 +40,10 @@ void System::advance(){
   ready_q.pop();
   return;
 }
+
+//Adds a process to the readyqueue
 void System::readyProcess(PCB* process){
+  process->setInitialBurst(initialBurstEstimate);
   ready_q.push(process);
   advance();
   return;
