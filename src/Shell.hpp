@@ -17,6 +17,10 @@ private:
   void releaseDeviceQ(char, int);
   void snapshot();
   /* ------------- */
+  
+  /* Scheduling Function */
+  void reviseEstimate();
+  /* ---------------------- */
 
   /* Snapshot assistants */
   void readyQStat();

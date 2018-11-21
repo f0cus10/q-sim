@@ -65,6 +65,13 @@ void Shell::run() {
 
 /* Private Functions */
 /*********************/
+//This function asks the timer how long the process has remained in the CPU
+void Shell::reviseEstimate(){
+  int timeUsed;
+  cout << "Enter amount of time spent in CPU (in ms): ";
+  cin >> timeUsed;
+  theSystem->updateEstimate(timeUsed);
+}
 
 bool Shell::isValid(const char& input){
   int i = 0;
