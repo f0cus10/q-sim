@@ -11,8 +11,7 @@ using namespace std;
 class SJF {
 public:
   bool operator() (const PCB*& lhs, const PCB*& rhs) const {
-    //TODO: calculate algorithm
-    return false;
+    return lhs->getCurrentEstimate() < rhs->getCurrentEstimate();
   }
 };
 
