@@ -45,6 +45,9 @@ public:
 
   //Take a process out of the device queue and into the ready queue
   void reQueue(char, int);
+  
+  //Make a new estimate for the process
+  void updateEstimate(int);
 
   //Get contents of queues
   void getReady(vector<PCB*>&);

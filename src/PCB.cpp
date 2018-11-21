@@ -8,10 +8,14 @@ char PCB::getStatus(){
   return status;
 }
 
+int PCB::getCurrentEstimate(){
+  return burstEstimate;
+}
+
 void PCB::setStatus(char newStatus){
   status = newStatus;
 }
 
-void PCB::setInitialBurst(double initialEstimate){
+void PCB::setInitialBurst(int initialEstimate){
   burstEstimate = initialEstimate;
 }

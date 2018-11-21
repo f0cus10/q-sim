@@ -140,3 +140,11 @@ void System::reQueue(char type, int id){
   if(process != nullptr) ready_q.push(process);
   return;
 }
+
+void System::updateEstimate(int timerInfo){
+  if (currentProcess){
+    int previous = currentProcess->getCurrentEstimate();
+    int newEstimate = (history_constant * previous) + (1 - history_constant)*timerInfo;
+    currentProcess->setNewEstimate(newEstimate);
+  }
+}
