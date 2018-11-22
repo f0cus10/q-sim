@@ -218,7 +218,7 @@ void Shell::addDiskFile(const string& command){
     cout << "Enter cylinder number: ";
     cin >> cylinder_num;
     //TODO: Need to add constructor to metaInfo with cylinder number
-    metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    metaInfo meta_data = metaInfo(fileName, mem, action, length, cylinder_num);
     reviseEstimate();
     theSystem->addDiskQ(disk_id, meta_data);
   }

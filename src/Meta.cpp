@@ -1,10 +1,11 @@
 #include "Meta.hpp"
 
-metaInfo::metaInfo(string fName_, string mem, char acc, string length){
+metaInfo::metaInfo(string fName_, string mem, char acc, string length, int trackNumber){
   fileName = fName_;
   memLocation = mem;
   action = acc;
   fileLength = length;
+  track = trackNumber;
 }
 
 string metaInfo::getFile(){
