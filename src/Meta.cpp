@@ -8,18 +8,22 @@ metaInfo::metaInfo(string fName_, string mem, char acc, string length, int track
   track = trackNumber;
 }
 
-string metaInfo::getFile(){
+string metaInfo::getFile() const{
   return fileName;
 }
 
-string metaInfo::getMem(){
+string metaInfo::getMem() const{
   return memLocation;
 }
 
-char metaInfo::getAction(){
+char metaInfo::getAction() const {
   return action;
 }
 
-string metaInfo::getLength(){
+string metaInfo::getLength() const {
   return fileLength;
+}
+
+int metaInfo::getTrack() const {
+  return track;
 }
