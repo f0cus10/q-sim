@@ -31,6 +31,20 @@ public:
 class DiskQ {
 private:
   disk_queue ascending;
+  disk_queue descending ( SCAN(true) );
+public:
+  bool asceding_empty() const;
+  bool descending_empty() const;
+
+  unsigned int size();
+
+  disk_process ascending_top() const;
+  disk_process descending_top() const;
+
+  void push_ascending(disk_process);
+  void push_descending(disk_process);
+  void pop_ascending();
+  void pop_descending();
 
 };
 
