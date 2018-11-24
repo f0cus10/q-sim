@@ -28,7 +28,7 @@ PCB* Disk::getProcess(){
     real_queue.pop_ascending();
     headPosition = process.second.getTrack();
     //Check if direction needs to be changed
-    if (real_queue.asceding_empty()){
+    if (real_queue.ascending_empty()){
       readDirection = !readDirection;
     }
     return process.first;
