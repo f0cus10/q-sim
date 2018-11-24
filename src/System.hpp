@@ -8,6 +8,7 @@
 #include "PCB.hpp"
 #include "Devices.hpp"
 #include "Ready_Q.hpp"
+#include "Disk.hpp"
 
 using std::vector;
 using std::queue;

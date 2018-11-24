@@ -10,15 +10,17 @@ private:
   string memLocation; //hex
   char action; //r=read, w=write
   string fileLength; //hex
+  int track;
 public:
   /* Overloaded Constructor */
-  metaInfo (string, string, char, string);
+  metaInfo (string, string, char, string, int trackNumber = 0);
 
   /* Getters */
-  string getFile();
-  string getMem();
-  char getAction();
-  string getLength(); 
+  string getFile() const;
+  string getMem() const;
+  char getAction() const;
+  string getLength() const;
+  int getTrack() const;
 };
 
 #endif

@@ -10,7 +10,7 @@ using namespace std;
 
 class SJF {
 public:
-  bool operator() (const PCB*& lhs, const PCB*& rhs) const {
+  bool operator() (PCB* const lhs, PCB* const rhs) const {
     return lhs->getCurrentEstimate() < rhs->getCurrentEstimate();
   }
 };
