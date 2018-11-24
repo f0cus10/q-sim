@@ -1,5 +1,5 @@
-#ifndef DISK_Q_HPP
-#define DISK_Q_HPP
+#ifndef DISKQ_HPP
+#define DISKQ_HPP
 
 #include <queue>
 #include <vector>
@@ -10,30 +10,33 @@
 
 using namespace std;
 
-class SCAN;
-typedef pair<PCB*, metaInfo> disk_process;
-typedef priority_queue<disk_process, vector<disk_process>, SCAN> disk_queue;
-
 class SCAN {
-private:
-  bool reverse;
 public:
-  //Overloaded constructor
-  SCAN(const bool& revparam = false){ reverse=revparam; }
   //Overloaded operator
-  bool operator() (const disk_process& lhs, const disk_process& rhs) const {
-    if (reverse) return lhs.second.getTrack() > rhs.second.getTrack();
-    return (lhs.second.getTrack() < rhs.second.getTrack());
+  bool operator() (const pair<PCB*, metaInfo>& lhs, const pair<PCB*, metaInfo>& rhs) const {
+    return lhs.second.getTrack() < rhs.second.getTrack();
   }
 };
+
+class DESCAN {
+  bool reverse;
+public:
+  bool operator() (const pair<PCB*, metaInfo>& lhs, const pair<PCB*, metaInfo>& rhs) const {
+    return lhs.second.getTrack() > rhs.second.getTrack();
+  }
+};
+
+typedef pair<PCB*, metaInfo> disk_process;
+typedef priority_queue<disk_process, vector<disk_process>, SCAN> disk_queue;
+typedef priority_queue<disk_process, vector<disk_process>, DESCAN > disk_queue_descent;
 
 
 class DiskQ {
 private:
   disk_queue ascending;
-  disk_queue descending ( SCAN(true) );
+  disk_queue_descent descending;
 public:
-  bool asceding_empty() const;
+  bool ascending_empty() const;
   bool descending_empty() const;
 
   unsigned int size();

@@ -6,4 +6,13 @@
 //  Copyright © 2018 Iftikhar Khan. All rights reserved.
 //
 
-#include <stdio.h>
+#include "Disk_Q.hpp"
+
+bool DiskQ::ascending_empty() const {
+  return ascending.empty();
+}
+
+bool DiskQ::descending_empty() const {
+  return descending.empty();
+}
+
