@@ -15,7 +15,7 @@ public:
   PCB* getProcess();
 private:
   int cylinder;
-  int headPosition;
+  int headPosition = 0;
   DiskQ real_queue;
 };
 
