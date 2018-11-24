@@ -16,6 +16,7 @@ public:
 private:
   int cylinder;
   int headPosition = 0;
+  bool readDirection = true; //true = increasing, false = decreasing
   DiskQ real_queue;
 };
 
