@@ -21,3 +21,28 @@ void Disk::intake(PCB* process, metaInfo metaData){
     real_queue.push_ascending(candidate);
   }
 }
+
+PCB* Disk::getProcess(){
+  if (readDirection){
+    auto process = real_queue.ascending_top();
+    real_queue.pop_ascending();
+    headPosition = process.second.getTrack();
+    //Check if direction needs to be changed
+    if (real_queue.asceding_empty()){
+      readDirection = !readDirection;
+    }
+    return process.first;
+  }
+  
+  else {
+    auto process = real_queue.descending_top();
+    real_queue.pop_descending();
+    headPosition = process.second.getTrack();
+    //Check if direction needs to be changed
+    if (real_queue.descending_empty()){
+      readDirection = !readDirection;
+    }
+    return process.first;
+  }
+  
+}
