@@ -46,3 +46,8 @@ PCB* Disk::getProcess(){
   }
   
 }
+
+vector<disk_process> Disk::stat(){
+  auto result = move(real_queue.iterable());
+  return result;
+}
