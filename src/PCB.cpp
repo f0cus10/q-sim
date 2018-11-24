@@ -19,3 +19,7 @@ void PCB::setStatus(char newStatus){
 void PCB::setInitialBurst(int initialEstimate){
   burstEstimate = initialEstimate;
 }
+
+void PCB::setNewEstimate(int updatedValue){
+  burstEstimate = updatedValue;
+}
