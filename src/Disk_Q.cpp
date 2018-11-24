@@ -43,3 +43,20 @@ void DiskQ::pop_descending(){
   descending.pop();
 }
 
+vector<disk_process> DiskQ::iterable() {
+  //Note: this algo is very in-efficient
+  //Make a copy of the queues
+  auto first = ascending;
+  auto second = descending;
+  //Iterate through them
+  vector<disk_process> result;
+  while (!first.empty()){
+    result.push_back(move(first.top()));
+    first.pop();
+  }
+  while (!second.empty()){
+    result.push_back(move(second.top()));
+    second.pop();
+  }
+  return result;
+}

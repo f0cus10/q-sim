@@ -49,6 +49,7 @@ public:
   void pop_ascending();
   void pop_descending();
 
+  vector<disk_process> iterable ();
 };
 
 #endif
