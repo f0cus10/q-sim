@@ -172,7 +172,7 @@ void Shell::addProcess(){
 * Kill (terminate) the process currently in the CPU
 */
 void Shell::killProcess(){
-  //TODO
+  //TODO: update the system's management
   theSystem->terminateProcess();
   return;
 }
