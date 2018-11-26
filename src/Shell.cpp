@@ -289,9 +289,12 @@ void Shell::readyQStat(){
 }
 
 void Shell::devStat(char type){
-  cout << setw(4) << "PID" << setw(4) << "Filename";
-  cout << setw(6) << "Memstart" << setw(4) << "R/W";
-  cout << setw(4) << "File Length" << endl;
+  cout << setw(8) << "PID" << setw(8) << "Filename";
+  cout << setw(12) << "Memstart" << setw(8) << "R/W";
+  cout << setw(8) << "File Length";
+  if (type == 'd') 
+    cout << setw(8) << "Cylinder";
+  cout << endl;
 
   vector< vector< pair<PCB*, metaInfo> > > masterStat;
   if (type == 'p'){
@@ -308,11 +311,12 @@ void Shell::devStat(char type){
     cout << "----" << type << i << endl;
     for (auto& eachPair: masterStat[i]) {
       //print PID
-      cout << setw(4) << eachPair.first->getPID();
-      cout << setw(4) << eachPair.second.getFile();
-      cout << setw(6) << eachPair.second.getMem();
-      cout << setw(4) << eachPair.second.getAction();
-      cout << setw(4) << eachPair.second.getLength();
+      cout << setw(8) << eachPair.first->getPID();
+      cout << setw(8) << eachPair.second.getFile();
+      cout << setw(12) << eachPair.second.getMem();
+      cout << setw(8) << eachPair.second.getAction();
+      cout << setw(8) << eachPair.second.getLength();
+      if (type == 'd') cout << setw(8) << eachPair.second.getTrack();
       cout << endl;
     }
   }
