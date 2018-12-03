@@ -1,4 +1,4 @@
-This is a project based on assignment requirements by [Eric Schweitzer] and the requirements can be found [here].
+This is a project based on assignment requirements by [Eric Schweitzer](http://cs.hunter.cuny.edu/~eschweit/) and the requirements can be found [here](http://cs.hunter.cuny.edu/~eschweit/OSstuff/340hw1.pdf).
 
 # System
 The system runs using keyboard input from the user. That is, for anything to happen, the user must provide an input. At the beginning, the user will be prompted for *system information* and a system with those **printer**, **disk**, and **flash** devices will be generated.
