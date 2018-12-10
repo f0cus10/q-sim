@@ -1,5 +1,5 @@
 CC = c++
-LFLAGS = -std=c++11 -O2
+LFLAGS = -std=c++11 -O3
 CFLAGS = -c -Wall
 
 # Set the EXECUTABLE_NAME variable to the preferred generated executable name
