@@ -15,11 +15,17 @@ using std::queue;
 
 class System {
 private:
+  /* CPU related stats */
   double initialBurstEstimate;
   double history_constant;
   
   int killedProcess = 0;
   int cumBurst = 0;
+  
+  /* Memory related stats */
+  unsigned int memSize;
+  unsigned int maxProcessSize;
+  unsigned int pageSize;
   
   vector<Printer> printers;
   vector<Disk> hdd;
@@ -29,7 +35,8 @@ private:
   void advance();
 public:
   /* Overloaded Constructor for sys gen */
-  System (int, int, int, double, int, const vector<int>&);
+  // Why the hell is this so long ?!?!?!?!?! Refactor it into a vector?
+  System (int, int, int, double, int, const vector<int>&, unsigned int, unsigned int, unsigned int);
   ~System();
   // Add process to the ready queue
   void readyProcess (PCB*);

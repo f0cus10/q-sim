@@ -39,7 +39,14 @@ Shell::Shell() {
     cylinderData.push_back(move(tempNumber));
   }
   
-  //TODO: Modify the constructor to take in the new parameters
+  unsigned int mem, proc, pg;
+  cout << "Specify total memory size: ";
+  cin >> mem;
+  cout << "Specify max process size: ";
+  cin >> proc;
+  cout << "Specify page size: ";
+  cin >> pg;
+  
   theSystem = new System(p, d, f, history, burstEstimate, cylinderData);
   cout << "System created" << endl;
 }

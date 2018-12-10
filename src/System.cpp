@@ -4,10 +4,15 @@
 
 using namespace std;
 
-System::System(int p, int d, int f, double history, int burst, const vector<int>& cylinder) {
+System::System (int p, int d, int f, double history, int burst, const vector<int>& cylinder,
+                unsigned int mSize, unsigned int procSize, unsigned int pgSize) {
   //set the private variables
   history_constant = history;
   initialBurstEstimate = burst;
+  
+  memSize = mSize;
+  maxProcessSize = procSize;
+  pageSize = pgSize;
   
   //Generate the number of devices specified
   for(unsigned int i = 0; i < p; ++i) {
