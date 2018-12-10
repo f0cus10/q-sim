@@ -68,6 +68,7 @@ void Shell::run() {
 
 //This function asks the timer how long the process has remained in the CPU
 void Shell::reviseEstimate(){
+  //if the system is not initialized or there is no current process in the CPU, DO NOTHING
   if (theSystem == nullptr || !theSystem->presentProcess()) return;
   int timeUsed;
   cout << "Enter amount of time spent in CPU (in ms): ";

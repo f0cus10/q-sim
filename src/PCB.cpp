@@ -23,3 +23,14 @@ void PCB::setInitialBurst(int initialEstimate){
 void PCB::setNewEstimate(int updatedValue){
   burstEstimate = updatedValue;
 }
+
+/* Statistics */
+unsigned int PCB::getTotalTime() const {
+  return totalBurst;
+}
+
+void PCB::updateTotalTime(unsigned int info){
+  //Add to the current total
+  totalBurst += info;
+  return;
+}
