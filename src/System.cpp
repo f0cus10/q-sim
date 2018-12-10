@@ -1,16 +1,22 @@
 #include "System.hpp"
 #include "Devices.hpp"
+#include "Ready_Q.hpp"
 
 using namespace std;
 
-System::System(int p, int d, int f) {
+System::System(int p, int d, int f, double history, int burst, const vector<int>& cylinder) {
+  //set the private variables
+  history_constant = history;
+  initialBurstEstimate = burst;
+  
   //Generate the number of devices specified
   for(unsigned int i = 0; i < p; ++i) {
     printers.push_back(Printer(i));
   }
 
   for (unsigned int i = 0; i < d; ++i) {
-    hdd.push_back(Disk(i));
+    //TODO: Make a constructor for Disk with the right parameters
+    hdd.push_back(Disk(i, cylinder[i]));
   }
 
   for(unsigned int i = 0; i < f; ++i) {
@@ -20,7 +26,7 @@ System::System(int p, int d, int f) {
 
 System::~System(){
   while(!ready_q.empty()){
-    auto process = ready_q.front();
+    auto process = ready_q.top();
     ready_q.pop();
     delete process;
   }
@@ -30,12 +36,15 @@ void System::advance(){
   if(ready_q.empty() || currentProcess != nullptr){
     return;
   }
-  currentProcess = ready_q.front();
+  currentProcess = ready_q.top();
   currentProcess->setStatus('c');
   ready_q.pop();
   return;
 }
+
+//Adds a process to the readyqueue
 void System::readyProcess(PCB* process){
+  process->setInitialBurst(initialBurstEstimate);
   ready_q.push(process);
   advance();
   return;
@@ -46,7 +55,7 @@ void System::terminateProcess(){
   delete currentProcess;
   //feed the next process
   if (ready_q.size() > 0) {
-    currentProcess = ready_q.front();
+    currentProcess = ready_q.top();
     ready_q.pop();
   }
   else {
@@ -91,9 +100,9 @@ void System::addFlashQ(int device, metaInfo m_data){
 }
 
 void System::getReady(vector<PCB*>& v){
-  queue<PCB*> copy = ready_q;
+  ReadyQ copy = ready_q;
   while (!copy.empty()){
-    v.push_back(copy.front());
+    v.push_back(copy.top());
     copy.pop();
   }
   return;
@@ -131,4 +140,12 @@ void System::reQueue(char type, int id){
   }
   if(process != nullptr) ready_q.push(process);
   return;
+}
+
+void System::updateEstimate(int timerInfo){
+  if (currentProcess){
+    int previous = currentProcess->getCurrentEstimate();
+    int newEstimate = (history_constant * previous) + (1 - history_constant)*timerInfo;
+    currentProcess->setNewEstimate(newEstimate);
+  }
 }

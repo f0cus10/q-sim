@@ -7,26 +7,32 @@
 
 #include "PCB.hpp"
 #include "Devices.hpp"
+#include "Ready_Q.hpp"
+#include "Disk.hpp"
 
 using std::vector;
 using std::queue;
 
 class System {
 private:
-  //TODO: Advance the next process in the ready_q to the CPU
+  double initialBurstEstimate;
+  double history_constant;
+  
   vector<Printer> printers;
   vector<Disk> hdd;
   vector<Flash> flashd;
-  queue<PCB*> ready_q;
+  ReadyQ ready_q;
   PCB* currentProcess = nullptr;
   void advance();
 public:
   /* Overloaded Constructor for sys gen */
-  System (int, int, int);
+  System (int, int, int, double, int, const vector<int>&);
   ~System();
   // Add process to the ready queue
   void readyProcess (PCB*);
-
+  
+  //Returns true if there is a process in the system
+  bool presentProcess(){ return currentProcess != nullptr; }
   //Terminate and de-allocate a process
   void terminateProcess();
 
@@ -42,6 +48,9 @@ public:
 
   //Take a process out of the device queue and into the ready queue
   void reQueue(char, int);
+  
+  //Make a new estimate for the process
+  void updateEstimate(int);
 
   //Get contents of queues
   void getReady(vector<PCB*>&);

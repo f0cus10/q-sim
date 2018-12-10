@@ -33,9 +33,4 @@ public:
   Flash(unsigned int flash_id): Device(flash_id) {}
 };
 
-class Disk: public Device {
-public:
-  Disk(unsigned int disk_id): Device(disk_id) {}
-};
-
 #endif

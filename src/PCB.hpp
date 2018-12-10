@@ -8,15 +8,20 @@ class PCB {
 private:
   unsigned int pid;
   char status; //q=ready queue, (p,d,f)=devices, c=cpu
+  int burstEstimate;
 public:
   /* Overloaded Constructor */
   PCB (unsigned int id, char genStatus='q'): pid(id), status(genStatus) {}
+  
   /* Getters */
-  unsigned int getPID();
-  char getStatus();
+  unsigned int getPID() const;
+  char getStatus() const;
+  int getCurrentEstimate() const;
 
   /* Setters */
   void setStatus(char newStatus);
+  void setInitialBurst(int);
+  void setNewEstimate(int);
 };
 
 #endif

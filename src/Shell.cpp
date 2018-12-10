@@ -24,7 +24,23 @@ Shell::Shell() {
   cout << "How many flash drives?";
   cin >> f;
   
-  theSystem = new System(p, d, f);
+  double history;
+  int burstEstimate;
+  vector<int> cylinderData;
+  
+  cout << "Enter the history parameter (between 0 and 1): ";
+  cin >> history;
+  cout << "Enter initial burst estimate (in ms): ";
+  cin >> burstEstimate;
+  for (unsigned int i = 0; i < d; ++i){
+    int tempNumber;
+    cout << "Enter number of cylinders for disk_" << i << ": ";
+    cin >> tempNumber;
+    cylinderData.push_back(move(tempNumber));
+  }
+  
+  //TODO: Modify the constructor to take in the new parameters
+  theSystem = new System(p, d, f, history, burstEstimate, cylinderData);
   cout << "System created" << endl;
 }
 
@@ -49,6 +65,15 @@ void Shell::run() {
 
 /* Private Functions */
 /*********************/
+
+//This function asks the timer how long the process has remained in the CPU
+void Shell::reviseEstimate(){
+  if (theSystem == nullptr || !theSystem->presentProcess()) return;
+  int timeUsed;
+  cout << "Enter amount of time spent in CPU (in ms): ";
+  cin >> timeUsed;
+  theSystem->updateEstimate(timeUsed);
+}
 
 bool Shell::isValid(const char& input){
   int i = 0;
@@ -135,8 +160,8 @@ bool Shell::verify(const string& command, int& dev_id){
 * Generate a PID for the process
 */
 void Shell::addProcess(){
-  //TODO
   //make a new PCB with the process
+  reviseEstimate();
   PCB* newProcess = new PCB(pid_count);
   theSystem->readyProcess(newProcess);
   ++pid_count;
@@ -169,6 +194,7 @@ void Shell::addPrinterJob(const string& command){
 
     //construct a metaInfo using this info
     metaInfo meta_data = metaInfo (fileName, mem, 'w', length);
+    reviseEstimate();
     theSystem->addPrinterQ(printer_id, meta_data);
   }
   return;
@@ -178,6 +204,7 @@ void Shell::addDiskFile(const string& command){
   //verification phase
   int disk_id;
   if(verify(command, disk_id)){
+    int cylinder_num;
     string fileName, mem, length;
     char action;
     cout << "Enter filename: ";
@@ -188,8 +215,11 @@ void Shell::addDiskFile(const string& command){
     cin >> action;
     cout << "Enter file length: ";
     getline(cin, length);
-
-    metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    cout << "Enter cylinder number: ";
+    cin >> cylinder_num;
+    //TODO: Need to add constructor to metaInfo with cylinder number
+    metaInfo meta_data = metaInfo(fileName, mem, action, length, cylinder_num);
+    reviseEstimate();
     theSystem->addDiskQ(disk_id, meta_data);
   }
 }
@@ -210,6 +240,7 @@ void Shell::addFlashFile(const string& command){
     getline(cin, length);
 
     metaInfo meta_data = metaInfo(fileName, mem, action, length);
+    reviseEstimate();
     theSystem->addFlashQ(flash_id, meta_data);
   }
 }
@@ -233,6 +264,7 @@ void Shell::snapshot(){
     readyQStat();
   }
   else if (type == 'p' || type == 'd' || type == 'f'){
+    reviseEstimate();
     devStat(type);
   }
   else{
