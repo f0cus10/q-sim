@@ -49,11 +49,16 @@ Shell::~Shell() {
 }
 
 void Shell::run() {
-  //This begins the running phase of the system and awaits keyboard input
   cout << "> ";
+  //This begins the running phase of the system and awaits keyboard input
   string u_input;
   getline(cin, u_input);
   //Check against the command array to see if the command is valid
+  if (u_input.empty() || u_input == " ") {
+    cout << endl;
+    return;
+  }
+  
   if (!isValid(u_input[0])){
     cout << "Invalid Command" << endl;
     return;
