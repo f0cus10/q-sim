@@ -281,12 +281,12 @@ void Shell::snapshot(){
 
 void Shell::readyQStat(){
   
-  cout << setw(7) << "PID";
+  cout << setw(5) << "PID";
   
   //Display other stuff
-  cout << setw(15) << "Total time";
-  cout << setw(15) << "Avg burst (int)";
-  cout << setw(10) << "T (next)";
+  cout << setw(12) << "Total time";
+  cout << setw(16) << "Avg burst (int)";
+  cout << setw(8) << "T (next)";
   cout << setw(15) << "T (n-remaining)";
   cout << endl;
 
@@ -294,10 +294,10 @@ void Shell::readyQStat(){
   theSystem->getReady(processes);
 
   for(auto& proc: processes){
-    cout << setw(7) << proc->getPID();
-    cout << setw(15) << proc->getTotalTime();
-    cout << setw(15) << (proc->getTotalTime()/proc->getFrequency());
-    cout << setw(10) << proc->getCurrentEstimate();
+    cout << setw(5) << proc->getPID();
+    cout << setw(12) << proc->getTotalTime();
+    cout << setw(16) << (proc->getTotalTime()/proc->getFrequency());
+    cout << setw(8) << proc->getCurrentEstimate();
     cout << setw(15) << proc->getCurrentEstimate() - proc->getTotalTime();
     cout << endl;
   }
