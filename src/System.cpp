@@ -64,6 +64,8 @@ vector<int> System::fareWell() const {
 
 void System::terminateProcess(){
   //Kill the process in the cpu
+  ++killedProcess;
+  cumBurst += currentProcess->getTotalTime() / currentProcess->getFrequency();
   delete currentProcess;
   //feed the next process
   if (ready_q.size() > 0) {
@@ -74,6 +76,10 @@ void System::terminateProcess(){
     currentProcess = nullptr;
   }
   return;
+}
+
+double System::getAvgBurst() const {
+  return cumBurst/killedProcess;
 }
 
 //Device counters

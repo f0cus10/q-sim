@@ -18,6 +18,9 @@ private:
   double initialBurstEstimate;
   double history_constant;
   
+  int killedProcess = 0;
+  int cumBurst = 0;
+  
   vector<Printer> printers;
   vector<Disk> hdd;
   vector<Flash> flashd;
@@ -38,6 +41,8 @@ public:
   vector<int> fareWell() const;
   //Terminate and de-allocate a process
   void terminateProcess();
+  
+  double getAvgBurst() const;
 
   //Get device counts for the system
   unsigned int getPrinterCount();
