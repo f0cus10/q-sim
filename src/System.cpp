@@ -50,6 +50,18 @@ void System::readyProcess(PCB* process){
   return;
 }
 
+//Provides relevant information in the form of a vector before process is killed
+vector<int> System::fareWell() const {
+  vector<int> info;
+  info.reserve(3);
+  if (currentProcess != nullptr) {
+    info[0] = currentProcess->getPID();
+    info[1] = currentProcess->getTotalTime();
+    info[2] = currentProcess->getTotalTime() / currentProcess->getFrequency();
+  }
+  return info;
+}
+
 void System::terminateProcess(){
   //Kill the process in the cpu
   delete currentProcess;

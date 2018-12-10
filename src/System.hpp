@@ -33,6 +33,9 @@ public:
   
   //Returns true if there is a process in the system
   bool presentProcess(){ return currentProcess != nullptr; }
+  
+  //Gather info before termination
+  vector<int> fareWell() const;
   //Terminate and de-allocate a process
   void terminateProcess();
 
