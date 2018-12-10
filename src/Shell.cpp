@@ -179,6 +179,10 @@ void Shell::addProcess(){
   int size;
   cout << "Enter process size: ";
   cin >> size;
+  if (size > theSystem->getMaxProcessSize()) {
+    cout << "Process memory size exceeds maximum memory" << endl;
+    return;
+  }
   theSystem->readyProcess(newProcess);
   return;
 }

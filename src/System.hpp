@@ -50,7 +50,8 @@ public:
   void terminateProcess();
   
   /* Important Getters */
-  unsigned int getMemSize() const; 
+  unsigned int getMemSize() const;
+  unsigned int getMaxProcessSize() const;
   double getAvgBurst() const;
 
   //Get device counts for the system

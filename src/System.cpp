@@ -88,6 +88,10 @@ unsigned int System::getMemSize() const {
   return memSize;
 }
 
+unsigned int System::getMaxProcessSize() const {
+  return maxProcessSize;
+}
+
 double System::getAvgBurst() const {
   return cumBurst/killedProcess;
 }
