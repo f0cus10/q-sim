@@ -47,7 +47,7 @@ Shell::Shell() {
   cout << "Specify page size: ";
   cin >> pg;
   
-  theSystem = new System(p, d, f, history, burstEstimate, cylinderData);
+  theSystem = new System(p, d, f, history, burstEstimate, cylinderData, mem, proc, pg);
   cout << "System created" << endl;
 }
 
