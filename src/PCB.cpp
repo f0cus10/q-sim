@@ -31,6 +31,11 @@ unsigned int PCB::getTotalTime() const {
 
 void PCB::updateTotalTime(unsigned int info){
   //Add to the current total
+  ++numProcessorBurst;
   totalBurst += info;
   return;
+}
+
+unsigned int PCB::getAverageBurst() const {
+  return numProcessorBurst;
 }

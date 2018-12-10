@@ -9,7 +9,8 @@ private:
   unsigned int pid;
   char status; //q=ready queue, (p,d,f)=devices, c=cpu
   int burstEstimate;
-  unsigned int totalBurst; //This will track the entire time spent in the CPU
+  unsigned int totalBurst = 0; //This will track the entire time spent in the CPU
+  unsigned int numProcessorBurst = 0;
 public:
   /* Overloaded Constructor */
   PCB (unsigned int id, char genStatus='q'): pid(id), status(genStatus) {}
@@ -27,6 +28,7 @@ public:
   /* Statistics */
   unsigned int getTotalTime() const;
   void updateTotalTime(unsigned int);
+  unsigned int getAverageBurst() const;
 };
 
 #endif
