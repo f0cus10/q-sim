@@ -309,10 +309,12 @@ void Shell::devStat(char type){
   systemTotalBurst();
   
   cout << setw(4) << "PID";
+  cout << setw(12) << "Total-time";
+  cout << setw(16) << "Avg-burst(int)";
   cout << setw(10) << "Filename";
   cout << setw(10) << "Memstart" ;
   cout << setw(5) << "R/W";
-  cout << setw(12) << "File-Length";
+  cout << setw(8) << "Length";
   cout << endl;
 
   vector< vector< pair<PCB*, metaInfo> > > masterStat;
@@ -331,10 +333,12 @@ void Shell::devStat(char type){
     for (auto& eachPair: masterStat[i]) {
       //print PID
       cout << setw(4) << eachPair.first->getPID();
+      cout << setw(12) << eachPair.first->getTotalTime();
+      cout << setw(16) << eachPair.first->getTotalTime()/eachPair.first->getFrequency();
       cout << setw(10) << eachPair.second.getFile();
       cout << setw(10) << eachPair.second.getMem();
       cout << setw(5) << eachPair.second.getAction();
-      cout << setw(12) << eachPair.second.getLength();
+      cout << setw(8) << eachPair.second.getLength();
       cout << endl;
     }
   }
