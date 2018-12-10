@@ -36,6 +36,6 @@ void PCB::updateTotalTime(unsigned int info){
   return;
 }
 
-unsigned int PCB::getAverageBurst() const {
+unsigned int PCB::getFrequency() const {
   return numProcessorBurst;
 }

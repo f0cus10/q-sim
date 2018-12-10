@@ -28,7 +28,7 @@ public:
   /* Statistics */
   unsigned int getTotalTime() const;
   void updateTotalTime(unsigned int);
-  unsigned int getAverageBurst() const;
+  unsigned int getFrequency() const;
 };
 
 #endif
