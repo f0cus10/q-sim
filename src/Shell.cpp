@@ -280,6 +280,7 @@ void Shell::snapshot(){
 }
 
 void Shell::readyQStat(){
+  systemTotalBurst();
   
   cout << setw(5) << "PID";
   
@@ -305,6 +306,7 @@ void Shell::readyQStat(){
 }
 
 void Shell::devStat(char type){
+  systemTotalBurst();
   
   cout << setw(4) << "PID" << setw(10) << "Filename";
   cout << setw(10) << "Memstart" << setw(5) << "R/W";
