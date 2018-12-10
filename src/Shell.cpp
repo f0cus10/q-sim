@@ -17,11 +17,11 @@ using namespace std;
 Shell::Shell() {
   //Prompt the user for everything
   int p, d, f;
-  cout << "How many printers?";
+  cout << "How many printers? ";
   cin >> p;
-  cout << "How many disks?";
+  cout << "How many disks? ";
   cin >> d;
-  cout << "How many flash drives?";
+  cout << "How many flash drives? ";
   cin >> f;
   
   double history;
@@ -294,9 +294,9 @@ void Shell::readyQStat(){
 }
 
 void Shell::devStat(char type){
-  cout << setw(4) << "PID" << setw(4) << "Filename";
-  cout << setw(6) << "Memstart" << setw(4) << "R/W";
-  cout << setw(4) << "File Length" << endl;
+  cout << setw(4) << "PID" << setw(10) << "Filename";
+  cout << setw(10) << "Memstart" << setw(5) << "R/W";
+  cout << setw(12) << "File Length" << endl;
 
   vector< vector< pair<PCB*, metaInfo> > > masterStat;
   if (type == 'p'){
@@ -314,10 +314,10 @@ void Shell::devStat(char type){
     for (auto& eachPair: masterStat[i]) {
       //print PID
       cout << setw(4) << eachPair.first->getPID();
-      cout << setw(4) << eachPair.second.getFile();
-      cout << setw(6) << eachPair.second.getMem();
-      cout << setw(4) << eachPair.second.getAction();
-      cout << setw(4) << eachPair.second.getLength();
+      cout << setw(10) << eachPair.second.getFile();
+      cout << setw(10) << eachPair.second.getMem();
+      cout << setw(5) << eachPair.second.getAction();
+      cout << setw(12) << eachPair.second.getLength();
       cout << endl;
     }
   }
