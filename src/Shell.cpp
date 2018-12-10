@@ -280,6 +280,7 @@ void Shell::snapshot(){
 }
 
 void Shell::readyQStat(){
+  
   cout << setw(7);
   cout << "PID" << endl;
 
@@ -294,6 +295,7 @@ void Shell::readyQStat(){
 }
 
 void Shell::devStat(char type){
+  
   cout << setw(4) << "PID" << setw(10) << "Filename";
   cout << setw(10) << "Memstart" << setw(5) << "R/W";
   cout << setw(12) << "File Length" << endl;
@@ -321,4 +323,11 @@ void Shell::devStat(char type){
       cout << endl;
     }
   }
+}
+
+void Shell::systemTotalBurst() {
+  if (theSystem != nullptr){
+    cout << "The system avg total CPU time: " << theSystem->getAvgBurst() << endl;
+  }
+  return;
 }

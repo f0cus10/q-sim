@@ -25,6 +25,7 @@ private:
   /* Snapshot assistants */
   void readyQStat();
   void devStat(char);
+  void systemTotalBurst();
   /* -------------------- */
 
   char commands[10] = {'A', 't', 'p', 'P', 'd', 'D', 'f', 'F', 'S','\0'};
