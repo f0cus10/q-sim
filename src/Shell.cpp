@@ -376,13 +376,8 @@ void Shell::pageVerify(unsigned int& pgValue, unsigned int memSize){
       continue;
     }
     
-    //Check for the power
-    unsigned int exp = 0;
-    unsigned int power = 1;
-    while (power <= pgValue){
-      power = pow(2, exp);
-      ++exp;
-    }
-    if (power == pgValue) valid = true;
+    //Check for the power using the referential method for integer conversion
+    int candidate = log2(pgValue);
+    if (pow(2, candidate) == pgValue) valid = true;
   }
 }
