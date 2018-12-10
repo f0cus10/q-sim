@@ -173,7 +173,14 @@ void Shell::addProcess(){
 * Kill (terminate) the process currently in the CPU
 */
 void Shell::killProcess(){
+  vector<int> stats = theSystem->fareWell();
+  if (!stats.empty()){
+    cout << "Terminated process PID: " << stats[0] << endl;
+    cout << "Terminated process Total CPU Time: " << stats[1] << endl;
+    cout << "Terminated process Avg Burst Time: " << stats[2] << endl;
+  }
   //TODO: update the system's management
+  
   theSystem->terminateProcess();
   return;
 }
