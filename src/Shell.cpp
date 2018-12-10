@@ -285,10 +285,10 @@ void Shell::readyQStat(){
   cout << setw(5) << "PID";
   
   //Display other stuff
-  cout << setw(12) << "Total time";
-  cout << setw(16) << "Avg burst (int)";
-  cout << setw(8) << "T (next)";
-  cout << setw(15) << "T (n-remaining)";
+  cout << setw(12) << "Total-time";
+  cout << setw(16) << "Avg-burst(int)";
+  cout << setw(8) << "T(next)";
+  cout << setw(15) << "T(n-remaining)";
   cout << endl;
 
   vector<PCB*> processes;
@@ -308,9 +308,12 @@ void Shell::readyQStat(){
 void Shell::devStat(char type){
   systemTotalBurst();
   
-  cout << setw(4) << "PID" << setw(10) << "Filename";
-  cout << setw(10) << "Memstart" << setw(5) << "R/W";
-  cout << setw(12) << "File Length" << endl;
+  cout << setw(4) << "PID";
+  cout << setw(10) << "Filename";
+  cout << setw(10) << "Memstart" ;
+  cout << setw(5) << "R/W";
+  cout << setw(12) << "File-Length";
+  cout << endl;
 
   vector< vector< pair<PCB*, metaInfo> > > masterStat;
   if (type == 'p'){
