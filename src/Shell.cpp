@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip> //for setw()
 #include <utility> //for pair()
+#include <cmath>
 
 #include "PCB.hpp"
 #include "Shell.hpp"
@@ -44,8 +45,7 @@ Shell::Shell() {
   cin >> mem;
   cout << "Specify max process size: ";
   cin >> proc;
-  cout << "Specify page size: ";
-  cin >> pg;
+  pageVerify(pg, mem);
   
   theSystem = new System(p, d, f, history, burstEstimate, cylinderData, mem, proc, pg);
   cout << "System created" << endl;
@@ -363,4 +363,26 @@ void Shell::systemTotalBurst() {
     cout << "The system avg total CPU time: " << theSystem->getAvgBurst() << endl;
   }
   return;
+}
+
+void Shell::pageVerify(unsigned int& pgValue, unsigned int memSize){
+  //This sanitizes the input for the page
+  bool valid = false;
+  while (!valid){
+    cout << "Specify page size (power of 2 and factor of memory size): ";
+    cin >> pgValue;
+    //Sanitize it
+    if (memSize % pgValue != 0){
+      continue;
+    }
+    
+    //Check for the power
+    unsigned int exp = 0;
+    unsigned int power = 1;
+    while (power <= pgValue){
+      power = pow(2, exp);
+      ++exp;
+    }
+    if (power == pgValue) valid = true;
+  }
 }

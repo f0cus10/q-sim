@@ -35,6 +35,7 @@ private:
   bool devicePoll(char, int);
   bool verify(const string&, int&);
   unsigned int pid_count = 0;
+  void pageVerify(unsigned int&, unsigned int);
 public:
   /* Default Constructor & Destructor */
   Shell();
