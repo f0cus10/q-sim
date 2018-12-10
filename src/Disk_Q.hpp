@@ -19,7 +19,7 @@ public:
 };
 
 class DESCAN {
-  bool reverse;
+
 public:
   bool operator() (const pair<PCB*, metaInfo>& lhs, const pair<PCB*, metaInfo>& rhs) const {
     return lhs.second.getTrack() > rhs.second.getTrack();
