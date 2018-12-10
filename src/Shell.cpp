@@ -122,7 +122,6 @@ void Shell::controller(string& user_input){
       snapshot();
       return;
     default:
-      cout << "Invalid Command" << endl;
       return;
   }
 }

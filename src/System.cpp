@@ -46,6 +46,7 @@ void System::advance(){
 void System::readyProcess(PCB* process){
   process->setInitialBurst(initialBurstEstimate);
   ready_q.push(process);
+  //If it is eligible to advance, it will 
   advance();
   return;
 }
@@ -100,6 +101,9 @@ void System::addPrinterQ(int device, metaInfo m_data){
   }
   printers[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
+  
+  //take the next process
+  advance();
 }
 
 void System::addDiskQ(int device, metaInfo m_data){
@@ -108,6 +112,9 @@ void System::addDiskQ(int device, metaInfo m_data){
   }
   hdd[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
+  
+  //take the next process in
+  advance();
 }
 void System::addFlashQ(int device, metaInfo m_data){
   if (currentProcess == nullptr){
@@ -115,6 +122,9 @@ void System::addFlashQ(int device, metaInfo m_data){
   }
   flashd[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
+  
+  //take the next process in
+  advance();
 }
 
 void System::getReady(vector<PCB*>& v){
