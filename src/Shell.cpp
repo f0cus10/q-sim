@@ -175,8 +175,11 @@ void Shell::addProcess(){
   //make a new PCB with the process
   reviseEstimate();
   PCB* newProcess = new PCB(pid_count);
-  theSystem->readyProcess(newProcess);
   ++pid_count;
+  int size;
+  cout << "Enter process size: ";
+  cin >> size;
+  theSystem->readyProcess(newProcess);
   return;
 }
 

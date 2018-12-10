@@ -84,6 +84,10 @@ void System::terminateProcess(){
   return;
 }
 
+unsigned int System::getMemSize() const {
+  return memSize;
+}
+
 double System::getAvgBurst() const {
   return cumBurst/killedProcess;
 }

@@ -49,6 +49,8 @@ public:
   //Terminate and de-allocate a process
   void terminateProcess();
   
+  /* Important Getters */
+  unsigned int getMemSize() const; 
   double getAvgBurst() const;
 
   //Get device counts for the system
