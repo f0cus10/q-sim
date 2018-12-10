@@ -179,8 +179,6 @@ void Shell::killProcess(){
     cout << "Terminated process Total CPU Time: " << stats[1] << endl;
     cout << "Terminated process Avg Burst Time: " << stats[2] << endl;
   }
-  //TODO: update the system's management
-  
   theSystem->terminateProcess();
   return;
 }
