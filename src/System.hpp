@@ -36,13 +36,18 @@ private:
   queue<frame> memory; //Amount of frames available
   PCB* currentProcess = nullptr;
   void advance();
+  void poolAdvance();
+  
 public:
   /* Overloaded Constructor for sys gen */
   // Why the hell is this so long ?!?!?!?!?! Refactor it into a vector?
   System (int, int, int, double, int, const vector<int>&, unsigned int, unsigned int, unsigned int);
   ~System();
+  static inline bool comp (PCB* i, PCB* j) { return i->getMemSize() < j->getMemSize();}
   // Add process to the ready queue
   void readyProcess (PCB*, unsigned int);
+  
+  void readyFromPool(PCB*);
   
   //Returns true if there is a process in the system
   bool presentProcess(){ return currentProcess != nullptr; }
@@ -84,6 +89,7 @@ public:
   void getPrinter(vector<vector<pair <PCB*, metaInfo> > >&);
   void getDisk(vector<vector<pair <PCB*, metaInfo> > >&);
   void getFlash(vector<vector<pair <PCB*, metaInfo> > >&);
+  
 };
 
 #endif

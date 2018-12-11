@@ -47,6 +47,7 @@ System::~System(){
 }
 
 void System::advance(){
+  poolAdvance();
   if(ready_q.empty() || currentProcess != nullptr){
     return;
   }
@@ -54,6 +55,32 @@ void System::advance(){
   currentProcess->setStatus('c');
   ready_q.pop();
   return;
+}
+
+void System::poolAdvance() {
+  if (memory.empty()) return;
+  sort(jobPool.begin(),jobPool.end(), comp);
+  unsigned int rollingSize = memory.size();
+  vector<PCB*> candidates;
+  for(unsigned int i =0; i < jobPool.size(); ++i){
+    if (jobPool[i]->getMemSize() < rollingSize){
+      candidates.push_back(jobPool[i]);
+      rollingSize -= jobPool[i]->getMemSize();
+      jobPool.erase(jobPool.begin() + i);
+    }
+  }
+  for (auto eachCandidate: candidates){
+    readyFromPool(eachCandidate);
+  }
+  return;
+}
+
+void System::readyFromPool(PCB* process){
+  for (unsigned int i = 0; i < process->getMemSize(); ++i){
+    process->vRAM[i] = memory.front();
+    memory.pop();
+  }
+  ready_q.push(process);
 }
 
 //Adds a process to the ready queue
@@ -267,3 +294,4 @@ void System::updateEstimate(int timerInfo){
     currentProcess->setNewEstimate(newEstimate);
   }
 }
+
