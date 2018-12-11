@@ -7,17 +7,18 @@ using std::string;
 class metaInfo {
 private:
   string fileName; //string
-  string memLocation; //hex
+  unsigned int memLocation; //logical memory address
   char action; //r=read, w=write
   string fileLength; //hex
   int track;
 public:
   /* Overloaded Constructor */
-  metaInfo (string, string, char, string, int trackNumber = 0);
+  metaInfo (string, unsigned int, char, string, int trackNumber = 0);
 
   /* Getters */
   string getFile() const;
   string getMem() const;
+  unsigned int getLogicalAddress() const;
   char getAction() const;
   string getLength() const;
   int getTrack() const;
