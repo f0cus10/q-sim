@@ -27,6 +27,14 @@ System::System (int p, int d, int f, double history, int burst, const vector<int
   for(unsigned int i = 0; i < f; ++i) {
     flashd.push_back(Flash(i));
   }
+  
+  //Do memory management
+  for (unsigned int i = 0;  i < memSize/pageSize; ++i){
+    frame f;
+    f.frame_id = i;
+    memory.push_back(f);
+  }
+  
 }
 
 System::~System(){

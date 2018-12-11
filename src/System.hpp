@@ -13,6 +13,10 @@
 using std::vector;
 using std::queue;
 
+struct frame {
+  unsigned int frame_id;
+};
+
 class System {
 private:
   /* CPU related stats */
@@ -31,6 +35,8 @@ private:
   vector<Disk> hdd;
   vector<Flash> flashd;
   ReadyQ ready_q;
+  vector<PCB*> jobPool; //Processes waiting for memory will wait here
+  vector<frame> memory; //Amount of frames available
   PCB* currentProcess = nullptr;
   void advance();
 public:
