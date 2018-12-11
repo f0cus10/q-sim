@@ -130,10 +130,11 @@ unsigned int System::getFlashCount(){
 }
 
 //System call issue
-void System::addPrinterQ(int device, metaInfo m_data){
+void System::addPrinterQ(int device, metaInfo m_data, int& physical){
   if (currentProcess == nullptr){
     return;
   }
+  physical = currentProcess->translateMemory(m_data.getLogicalAddress(), pageSize);
   printers[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
   
@@ -141,20 +142,22 @@ void System::addPrinterQ(int device, metaInfo m_data){
   advance();
 }
 
-void System::addDiskQ(int device, metaInfo m_data){
+void System::addDiskQ(int device, metaInfo m_data, int& physical){
   if (currentProcess == nullptr){
     return;
   }
+  physical = currentProcess->translateMemory(m_data.getLogicalAddress(), pageSize);
   hdd[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
   
   //take the next process in
   advance();
 }
-void System::addFlashQ(int device, metaInfo m_data){
+void System::addFlashQ(int device, metaInfo m_data, int& physical){
   if (currentProcess == nullptr){
     return;
   }
+  physical = currentProcess->translateMemory(m_data.getLogicalAddress(), pageSize);
   flashd[device].intake(currentProcess, m_data);
   currentProcess = nullptr;
   

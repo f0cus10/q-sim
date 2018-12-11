@@ -33,6 +33,16 @@ void PCB::setMemSize(unsigned int memory){
   memSize = memory;
 }
 
+
+/* Memory translation */
+unsigned int PCB::translateMemory(unsigned int logical, unsigned int pageSize){
+  unsigned int pageNum, frame, offset;
+  
+  pageNum = logical/pageSize;
+  frame = vRAM[pageNum].frame_id;
+  offset = logical % pageSize;
+  return frame * pageSize + offset;
+}
 /* Statistics */
 unsigned int PCB::getTotalTime() const {
   return totalBurst;

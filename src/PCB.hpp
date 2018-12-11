@@ -22,6 +22,9 @@ public:
   /* Overloaded Constructor */
   PCB (unsigned int id, char genStatus='q'): pid(id), status(genStatus) {}
   
+  /* Memory translation */
+  unsigned int translateMemory(unsigned int, unsigned int);
+  
   /* Getters */
   unsigned int getPID() const;
   char getStatus() const;
