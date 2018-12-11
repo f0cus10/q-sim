@@ -335,6 +335,7 @@ void Shell::readyQStat(){
   cout << setw(16) << "Avg-burst(int)";
   cout << setw(8) << "T(next)";
   cout << setw(15) << "T(n-remaining)";
+  cout << setw(8) << "frames";
   cout << endl;
 
   vector<PCB*> processes;
@@ -346,6 +347,11 @@ void Shell::readyQStat(){
     cout << setw(16) << (proc->getTotalTime()/proc->getFrequency());
     cout << setw(8) << proc->getCurrentEstimate();
     cout << setw(15) << proc->getCurrentEstimate() - proc->getTotalTime();
+    string result;
+    for (auto each: proc->vRAM){
+      result += to_string(each.frame_id);
+    }
+    cout << setw(8) << result;
     cout << endl;
   }
   return;
@@ -362,7 +368,7 @@ void Shell::devStat(char type){
   cout << setw(5) << "R/W";
   cout << setw(8) << "Length";
   if (type == 'd') cout << setw(5) << "Cyl";
-  
+  cout << setw(8) << "frames";
   cout << endl;
 
   vector< vector< pair<PCB*, metaInfo> > > masterStat;
@@ -389,6 +395,10 @@ void Shell::devStat(char type){
       cout << setw(5) << eachPair.second.getAction();
       cout << setw(8) << eachPair.second.getLength();
       if (type == 'd') cout << setw(5) << eachPair.second.getTrack();
+      string result;
+      for (auto each: eachPair.first->vRAM){
+        result += to_string(each.frame_id);
+      }
       cout << endl;
     }
   }
