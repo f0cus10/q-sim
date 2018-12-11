@@ -55,12 +55,14 @@ public:
   /* Important Getters */
   unsigned int getMemSize() const;
   unsigned int getMaxProcessSize() const;
+  unsigned int getPageSize() const {return pageSize; }
   double getAvgBurst() const;
 
   //Get device counts for the system
   unsigned int getPrinterCount();
   unsigned int getDiskCount();
   unsigned int getFlashCount();
+  
 
   //Issue system calls to devices from CPU process
   void addPrinterQ(int, metaInfo, int&);

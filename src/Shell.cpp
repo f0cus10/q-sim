@@ -340,10 +340,11 @@ void Shell::devStat(char type){
   cout << setw(12) << "Total-time";
   cout << setw(10) << "Avg-burst";
   cout << setw(10) << "Filename";
-  cout << setw(10) << "Memstart" ;
+  cout << setw(10) << "PhysMem" ;
   cout << setw(5) << "R/W";
   cout << setw(8) << "Length";
   if (type == 'd') cout << setw(5) << "Cyl";
+  
   cout << endl;
 
   vector< vector< pair<PCB*, metaInfo> > > masterStat;
@@ -365,7 +366,8 @@ void Shell::devStat(char type){
       cout << setw(12) << eachPair.first->getTotalTime();
       cout << setw(16) << eachPair.first->getTotalTime()/eachPair.first->getFrequency();
       cout << setw(10) << eachPair.second.getFile();
-      cout << setw(10) << eachPair.second.getMem();
+      //New memory management
+      cout << setw(10) << hex << eachPair.first->translateMemory(eachPair.second.getLogicalAddress(), theSystem->getPageSize());
       cout << setw(5) << eachPair.second.getAction();
       cout << setw(8) << eachPair.second.getLength();
       if (type == 'd') cout << setw(5) << eachPair.second.getTrack();
