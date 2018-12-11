@@ -105,6 +105,10 @@ void System::terminateProcess(){
   //Kill the process in the cpu
   ++killedProcess;
   cumBurst += currentProcess->getTotalTime() / currentProcess->getFrequency();
+  for (auto eachFrame: currentProcess->vRAM){
+    memory.push(move(eachFrame));
+  }
+  currentProcess->vRAM.clear();
   delete currentProcess;
   //feed the next process
   if (ready_q.size() > 0) {
@@ -124,6 +128,11 @@ void System::terminateProcess(PCB* given){
   else{
     ++killedProcess;
     cumBurst += given->getTotalTime() / given->getFrequency();
+    //Free memory
+    for(auto eachFrame: given->vRAM){
+      memory.push(move(eachFrame));
+    }
+    given->vRAM.clear();
     delete given;
     given = nullptr;
   }
