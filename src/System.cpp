@@ -1,3 +1,4 @@
+#include <cmath>
 #include "System.hpp"
 #include "Devices.hpp"
 #include "Ready_Q.hpp"
@@ -58,7 +59,7 @@ void System::advance(){
 //Adds a process to the ready queue
 void System::readyProcess(PCB* process, unsigned int processSize){
   process->setInitialBurst(initialBurstEstimate);
-  process->setMemSize(processSize/pageSize);
+  process->setMemSize(ceil(processSize/pageSize));
   //see if it needs to be pushed to job pool
   if ( memory.size()*pageSize < process->getMemSize()){
     jobPool.push_back(process);

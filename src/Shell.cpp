@@ -208,18 +208,21 @@ void Shell::addPrinterJob(const string& command){
   int printer_id;
   if(verify(command, printer_id)){
     //Prompt for metadata
-    string fileName, mem, length;
+    string fileName, length;
+    int mem;
     cout << "Enter filename: ";
     getline(cin, fileName);
     cout << "Enter memory: ";
-    getline(cin, mem);
+    cin >> hex >> mem;
     cout << "Enter file length: ";
     getline(cin, length);
 
     //construct a metaInfo using this info
     metaInfo meta_data = metaInfo (fileName, mem, 'w', length);
     reviseEstimate();
-    theSystem->addPrinterQ(printer_id, meta_data);
+    int transAddress;
+    theSystem->addPrinterQ(printer_id, meta_data, transAddress);
+    cout << "The physical address is: 0x" << hex << transAddress;
   }
   return;
 }
@@ -229,12 +232,13 @@ void Shell::addDiskFile(const string& command){
   int disk_id;
   if(verify(command, disk_id)){
     int cylinder_num;
-    string fileName, mem, length;
+    string fileName, length;
+    int mem;
     char action;
     cout << "Enter filename: ";
     getline(cin, fileName);
     cout << "Enter Memory: ";
-    getline(cin, mem);
+    cin >> hex >> mem;
     cout << "Action (r/w): ";
     cin >> action;
     cout << "Enter file length: ";
@@ -244,7 +248,9 @@ void Shell::addDiskFile(const string& command){
     //TODO: Need to add constructor to metaInfo with cylinder number
     metaInfo meta_data = metaInfo(fileName, mem, action, length, cylinder_num);
     reviseEstimate();
-    theSystem->addDiskQ(disk_id, meta_data);
+    int transAddress;
+    theSystem->addDiskQ(disk_id, meta_data, transAddress);
+    cout << "The physical address is: 0x" << hex << transAddress;
   }
 }
 
@@ -252,12 +258,13 @@ void Shell::addFlashFile(const string& command){
   //verification phase
   int flash_id;
   if(verify(command, flash_id)){
-    string fileName, mem, length;
+    string fileName, length;
+    int mem;
     char action;
     cout << "Enter filename: ";
     getline(cin, fileName);
     cout << "Enter Memory: ";
-    getline(cin, mem);
+    cin >> hex >> mem;
     cout << "Action (r/w): ";
     cin >> action;
     cout << "Enter file length: ";
@@ -265,7 +272,9 @@ void Shell::addFlashFile(const string& command){
 
     metaInfo meta_data = metaInfo(fileName, mem, action, length);
     reviseEstimate();
-    theSystem->addFlashQ(flash_id, meta_data);
+    int translatedAddress;
+    theSystem->addFlashQ(flash_id, meta_data, translatedAddress);
+    cout << "The physical address is: 0x" << hex << translatedAddress;
   }
 }
 
