@@ -2,7 +2,10 @@
 #define PCB_HXX
 
 #include <string>
-using std::string;
+#include <vector>
+#include "frame.hpp"
+
+using namespace std;
 
 class PCB {
 private:
@@ -11,6 +14,10 @@ private:
   int burstEstimate;
   unsigned int totalBurst = 0; //This will track the entire time spent in the CPU
   unsigned int numProcessorBurst = 0;
+  
+  /* Memory allocation module */
+  vector<frame> vRAM;
+  
 public:
   /* Overloaded Constructor */
   PCB (unsigned int id, char genStatus='q'): pid(id), status(genStatus) {}

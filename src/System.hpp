@@ -5,6 +5,7 @@
 #include <vector>
 #include <queue>
 
+#include "frame.hpp"
 #include "PCB.hpp"
 #include "Devices.hpp"
 #include "Ready_Q.hpp"
@@ -12,10 +13,6 @@
 
 using std::vector;
 using std::queue;
-
-struct frame {
-  unsigned int frame_id;
-};
 
 class System {
 private:
