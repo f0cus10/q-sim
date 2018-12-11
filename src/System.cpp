@@ -138,6 +138,7 @@ void System::terminateProcess(){
   currentProcess->vRAM.clear();
   delete currentProcess;
   //feed the next process
+  poolAdvance();
   if (ready_q.size() > 0) {
     currentProcess = ready_q.top();
     ready_q.pop();
@@ -162,6 +163,7 @@ void System::terminateProcess(PCB* given){
     given->vRAM.clear();
     delete given;
     given = nullptr;
+    poolAdvance();
   }
   return;
 }

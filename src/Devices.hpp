@@ -14,6 +14,7 @@ class Device {
 private:
   unsigned int id;
   queue< pair<PCB*, metaInfo> > deviceQueue;
+  void sanitize();
 protected:
   void addProcess(pair<PCB*, metaInfo>);
 public:

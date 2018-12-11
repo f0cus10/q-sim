@@ -11,6 +11,14 @@ Device::Device(unsigned int device_id){
   id = device_id;
 }
 
+void Device::sanitize() {
+  queue< pair<PCB*, metaInfo> > copy;
+  while (!deviceQueue.empty()){
+    if (deviceQueue.front() != nullptr) copy.push(deviceQueue.front());
+    deviceQueue.pop();
+  }
+  deviceQueue = copy;
+}
 //returns nullptr if there are no processes at the front
 //else, returns the front process
 PCB* Device::getProcess(){
@@ -36,7 +44,7 @@ void Device::addProcess(pair<PCB*, metaInfo> input){
 
 vector <pair<PCB*, metaInfo> > Device::stat(){
   vector<pair<PCB*, metaInfo> > result;
-  auto copy = deviceQueue;
+  queue< pair<PCB*, metaInfo> > copy;
   while(!copy.empty()){
     if (copy.front().first != nullptr)result.push_back(copy.front());
     copy.pop();
