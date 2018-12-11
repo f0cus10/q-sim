@@ -220,7 +220,7 @@ void System::addFlashQ(int device, metaInfo m_data, int& physical){
 void System::getReady(vector<PCB*>& v){
   ReadyQ copy = ready_q;
   while (!copy.empty()){
-    v.push_back(copy.top());
+    if(copy.top() != nullptr) v.push_back(copy.top());
     copy.pop();
   }
   return;

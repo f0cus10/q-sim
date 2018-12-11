@@ -38,7 +38,7 @@ vector <pair<PCB*, metaInfo> > Device::stat(){
   vector<pair<PCB*, metaInfo> > result;
   auto copy = deviceQueue;
   while(!copy.empty()){
-    result.push_back(copy.front());
+    if (copy.front().first != nullptr)result.push_back(copy.front());
     copy.pop();
   }
   return result;
