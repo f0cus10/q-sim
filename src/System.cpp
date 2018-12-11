@@ -32,7 +32,7 @@ System::System (int p, int d, int f, double history, int burst, const vector<int
   for (unsigned int i = 0;  i < memSize/pageSize; ++i){
     frame f;
     f.frame_id = i;
-    memory.push_back(f);
+    memory.push(f);
   }
   
 }
@@ -55,10 +55,23 @@ void System::advance(){
   return;
 }
 
-//Adds a process to the readyqueue
-void System::readyProcess(PCB* process){
+//Adds a process to the ready queue
+void System::readyProcess(PCB* process, unsigned int processSize){
   process->setInitialBurst(initialBurstEstimate);
-  ready_q.push(process);
+  process->setMemSize(processSize/pageSize);
+  //see if it needs to be pushed to job pool
+  if ( memory.size()*pageSize < process->getMemSize()){
+    jobPool.push_back(process);
+  }
+  else {
+    //allocate the frames accordingly
+    for (unsigned int i = 0; i < process->getMemSize(); ++i){
+      process->vRAM[i] = memory.front();
+      memory.pop();
+    }
+    ready_q.push(process);
+  }
+  
   //If it is eligible to advance, it will 
   advance();
   return;

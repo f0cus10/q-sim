@@ -33,7 +33,7 @@ private:
   vector<Flash> flashd;
   ReadyQ ready_q;
   vector<PCB*> jobPool; //Processes waiting for memory will wait here
-  vector<frame> memory; //Amount of frames available
+  queue<frame> memory; //Amount of frames available
   PCB* currentProcess = nullptr;
   void advance();
 public:
@@ -42,7 +42,7 @@ public:
   System (int, int, int, double, int, const vector<int>&, unsigned int, unsigned int, unsigned int);
   ~System();
   // Add process to the ready queue
-  void readyProcess (PCB*);
+  void readyProcess (PCB*, unsigned int);
   
   //Returns true if there is a process in the system
   bool presentProcess(){ return currentProcess != nullptr; }

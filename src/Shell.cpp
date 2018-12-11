@@ -183,7 +183,7 @@ void Shell::addProcess(){
     cout << "Process memory size exceeds maximum memory" << endl;
     return;
   }
-  theSystem->readyProcess(newProcess);
+  theSystem->readyProcess(newProcess, size);
   return;
 }
 

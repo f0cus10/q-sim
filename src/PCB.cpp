@@ -24,6 +24,15 @@ void PCB::setNewEstimate(int updatedValue){
   burstEstimate = updatedValue;
 }
 
+void PCB::setMemSize(unsigned int memory){
+  //The number of frames that should be allocated
+  for (unsigned int i =0; i < memory; ++i){
+    frame f;
+    vRAM.push_back(f);
+  }
+  memSize = memory;
+}
+
 /* Statistics */
 unsigned int PCB::getTotalTime() const {
   return totalBurst;
@@ -38,4 +47,8 @@ void PCB::updateTotalTime(unsigned int info){
 
 unsigned int PCB::getFrequency() const {
   return numProcessorBurst;
+}
+
+unsigned int PCB::getMemSize() const {
+  return memSize;
 }

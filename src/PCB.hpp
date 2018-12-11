@@ -14,11 +14,11 @@ private:
   int burstEstimate;
   unsigned int totalBurst = 0; //This will track the entire time spent in the CPU
   unsigned int numProcessorBurst = 0;
-  
-  /* Memory allocation module */
-  vector<frame> vRAM;
+  unsigned int memSize;
   
 public:
+  /* Memory allocation module */
+  vector<frame> vRAM;
   /* Overloaded Constructor */
   PCB (unsigned int id, char genStatus='q'): pid(id), status(genStatus) {}
   
@@ -26,11 +26,13 @@ public:
   unsigned int getPID() const;
   char getStatus() const;
   int getCurrentEstimate() const;
+  unsigned int getMemSize() const;
 
   /* Setters */
   void setStatus(char newStatus);
   void setInitialBurst(int);
   void setNewEstimate(int);
+  void setMemSize(unsigned int);
   
   /* Statistics */
   unsigned int getTotalTime() const;
