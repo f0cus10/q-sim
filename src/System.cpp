@@ -118,7 +118,15 @@ void System::terminateProcess(){
 }
 
 void System::terminateProcess(PCB* given){
-  //TODO
+  if (currentProcess == given){
+    terminateProcess();
+  }
+  else{
+    ++killedProcess;
+    cumBurst += given->getTotalTime() / given->getFrequency();
+    delete given;
+    given = nullptr;
+  }
   return;
 }
 
