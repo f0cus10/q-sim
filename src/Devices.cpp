@@ -14,7 +14,7 @@ Device::Device(unsigned int device_id){
 void Device::sanitize() {
   queue< pair<PCB*, metaInfo> > copy;
   while (!deviceQueue.empty()){
-    if (deviceQueue.front() != nullptr) copy.push(deviceQueue.front());
+    if (deviceQueue.front().first != nullptr) copy.push(deviceQueue.front());
     deviceQueue.pop();
   }
   deviceQueue = copy;
