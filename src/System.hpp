@@ -47,10 +47,14 @@ public:
   //Returns true if there is a process in the system
   bool presentProcess(){ return currentProcess != nullptr; }
   
+  PCB* find(unsigned int);
+  
   //Gather info before termination
   vector<int> fareWell() const;
+  vector<int> fareWell(PCB*) const;
   //Terminate and de-allocate a process
   void terminateProcess();
+  void terminateProcess(PCB*);
   
   /* Important Getters */
   unsigned int getMemSize() const;

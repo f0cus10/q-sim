@@ -90,6 +90,17 @@ vector<int> System::fareWell() const {
   return info;
 }
 
+vector<int> System::fareWell(PCB* givenProcess) const {
+  vector<int> info;
+  info.reserve(3);
+  if (givenProcess != nullptr){
+    info[0] = givenProcess->getPID();
+    info[1] = givenProcess->getTotalTime();
+    info[2] = givenProcess->getTotalTime() / givenProcess->getFrequency();
+  }
+  return info;
+}
+
 void System::terminateProcess(){
   //Kill the process in the cpu
   ++killedProcess;
@@ -106,6 +117,30 @@ void System::terminateProcess(){
   return;
 }
 
+void System::terminateProcess(PCB* given){
+  //TODO
+  return;
+}
+
+PCB* System::find(unsigned int pid){
+  //Fetch ready_queue
+  if (currentProcess && currentProcess->getPID() == pid){
+    return currentProcess;
+  }
+  auto readyData = ready_q.snapshot();
+  for(auto eachProcess: readyData){
+    if (eachProcess->getPID() == pid){
+      return eachProcess;
+    }
+  }
+  
+  for (auto eachJob: jobPool){
+    if (eachJob->getPID() == pid){
+      return eachJob;
+    }
+  }
+  return nullptr;
+}
 unsigned int System::getMemSize() const {
   return memSize;
 }

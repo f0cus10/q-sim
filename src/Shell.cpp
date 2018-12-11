@@ -133,6 +133,9 @@ void Shell::controller(string& user_input){
     case 'S':
       snapshot();
       return;
+    case 'K':
+      abortProcess(user_input);
+      return;
     default:
       return;
   }
@@ -201,6 +204,21 @@ void Shell::killProcess(){
   return;
 }
 
+
+void Shell::abortProcess(string u_input){
+  unsigned pid;
+  if (u_input[0] == 'K' && u_input[1] == '#'){
+    pid = stoi(u_input.substr(2,string::npos));
+    PCB* process = theSystem->find(pid);
+    vector<int> stats = theSystem->fareWell(process);
+    if (!stats.empty()){
+      cout << "Terminated process PID: " << stats[0] << endl;
+      cout << "Terminated process Total CPU Time: " << stats[1] << endl;
+      cout << "Terminated process Avg Burst Time: " << stats[2] << endl;
+    }
+    theSystem->terminateProcess(process);
+  }
+}
 /*
 * Add a job to the proper printer's queue by using this function
 */

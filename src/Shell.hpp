@@ -11,6 +11,7 @@ private:
   /* Controlling functions */
   void addProcess();
   void killProcess();
+  void abortProcess(string);
   void addPrinterJob(const string&);
   void addDiskFile(const string&);
   void addFlashFile(const string&);
@@ -28,7 +29,7 @@ private:
   void systemTotalBurst();
   /* -------------------- */
 
-  char commands[10] = {'A', 't', 'p', 'P', 'd', 'D', 'f', 'F', 'S','\0'};
+  char commands[11] = {'A', 't', 'p', 'P', 'd', 'D', 'f', 'F', 'S', 'K','\0'};
   System* theSystem = nullptr;
   bool isValid(const char&);
   void controller(string&);
