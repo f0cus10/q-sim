@@ -1,4 +1,5 @@
 #include <cmath>
+#include <algorithm>
 #include "System.hpp"
 #include "Devices.hpp"
 #include "Ready_Q.hpp"
